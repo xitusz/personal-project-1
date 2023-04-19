@@ -12,9 +12,7 @@ export const validateEmail = (email) => {
 };
 
 export const validatePassword = (password) => {
-  if (password.length < 6) {
-    return "A senha deve ter pelo menos 6 caracteres";
-  } else if (password.length > 12) {
-    return "A senha não pode ter mais de 12 caracteres";
+  if (password.length < 6 || password.length > 12) {
+    return "A senha deve ter de 6 a 12 caracteres";
   }
 };
