@@ -35,10 +35,10 @@ const Register = () => {
 
     if (nameError) {
       setError(nameError);
-    } else if (passwordError) {
-      setError(passwordError);
     } else if (emailError) {
       setError(emailError);
+    } else if (passwordError) {
+      setError(passwordError);
     } else if (users.find((user) => user.email === email)) {
       setError("Email já registrado");
     } else {
@@ -62,49 +62,81 @@ const Register = () => {
   };
 
   return (
-    <form>
-      <h1>Registre-se</h1>
-      <label htmlFor="name">
-        Nome
-        <input
-          type="text"
-          id="name"
-          name="name"
-          placeholder="Seu Nome"
-          value={name}
-          onChange={handlenameChange}
-          required
-        />
-      </label>
-      <label htmlFor="email">
-        Email
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="email@example.com"
-          value={email}
-          onChange={handleEmailChange}
-          required
-        />
-      </label>
-      <label htmlFor="password">
-        Senha
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="*********"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-        />
-      </label>
-      <Button onClick={handleRegister}>Registrar</Button>
-      <Link to="/login">
-        <Button>Entrar</Button>
-      </Link>
-      {error && <div>{error}</div>}
+    <form className="container mt-4">
+      <h1 className="mb-3 text-center">Registre-se</h1>
+      <div className="row align-items-center text-center">
+        <div className="col-md-10 mx-auto col-lg-5">
+          <div className="p-4 p-md-5 border rounded-3 bg-light mb-1">
+            <div className="input-group">
+              <span className="input-group-text">Nome</span>
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="Nome"
+                  value={name}
+                  onChange={handlenameChange}
+                  required
+                />
+                <label htmlFor="name">Nome</label>
+              </div>
+            </div>
+            <div className="form-text mb-3">
+              Seu nome deve ter no mínimo 2 caracteres.
+            </div>
+            <div className="input-group">
+              <span className="input-group-text">Email</span>
+              <div className="form-floating">
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="email@example.com"
+                  value={email}
+                  onChange={handleEmailChange}
+                  required
+                />
+                <label htmlFor="email">email@example.com</label>
+              </div>
+            </div>
+            <div className="form-text mb-3">
+              Seu email deve ser um email válido.
+            </div>
+            <div className="input-group">
+              <span className="input-group-text">Senha</span>
+              <div className="form-floating">
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="*********"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  required
+                />
+                <label htmlFor="password">*********</label>
+              </div>
+            </div>
+            <div className="form-text">
+              Sua senha deve ter de 6 a 12 caracteres.
+            </div>
+          </div>
+          <Button
+            className="btn btn-primary w-100 mb-2"
+            onClick={handleRegister}
+          >
+            Registrar
+          </Button>
+          <Link to="/login">
+            <Button className="btn btn-secondary w-100">Entrar</Button>
+          </Link>
+          {error && <div className="mt-3 alert alert-danger">{error}</div>}
+        </div>
+      </div>
     </form>
   );
 };
