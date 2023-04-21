@@ -91,7 +91,7 @@ const Login = () => {
               Entrar
             </Button>
             <Link to="/register">
-              <Button className="btn btn-secondary w-100">Registrar-se</Button>
+              <Button className="btn btn-secondary w-100">Cadastre-se</Button>
             </Link>
             {error && <div className="mt-3 alert alert-danger">{error}</div>}
           </div>
