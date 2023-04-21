@@ -32,7 +32,7 @@ describe("Routes", () => {
       </MemoryRouter>
     );
 
-    expect(getByRole("heading", { name: /registre-se/i })).toBeInTheDocument();
+    expect(getByRole("heading", { name: /cadastre-se/i })).toBeInTheDocument();
   });
 
   it("should render character component when route is '/character'", () => {
