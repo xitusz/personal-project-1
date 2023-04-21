@@ -18,3 +18,15 @@ export const setItemToLocalStorage = (key, element) => {
     throw new Error("element must be serializable");
   }
 };
+
+export const removeItemFromLocalStorage = (key) => {
+  if (!key) {
+    throw new Error("key must be provided");
+  }
+
+  if (typeof key !== "string") {
+    throw new Error("key must be a string");
+  }
+
+  localStorage.removeItem(key);
+};
