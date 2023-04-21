@@ -25,24 +25,24 @@ describe("Login page", () => {
     const heading = screen.getByRole("heading", { name: /login/i });
     expect(heading).toBeInTheDocument();
 
-    const emailInput = screen.getByLabelText(/email/i);
+    const emailInput = screen.getByLabelText(/email@example.com/i);
     expect(emailInput).toBeInTheDocument();
 
-    const passwordInput = screen.getByLabelText(/senha/i);
+    const passwordInput = screen.getByLabelText("*********");
     expect(passwordInput).toBeInTheDocument();
 
     const loginButton = screen.getByRole("button", { name: /entrar/i });
     expect(loginButton).toBeInTheDocument();
 
     const registerButton = screen.getByRole("button", {
-      name: /registrar-se/i,
+      name: /cadastre-se/i,
     });
     expect(registerButton).toBeInTheDocument();
   });
 
   it("should updates the email and password fields correctly", () => {
-    const emailInput = screen.getByLabelText(/email/i);
-    const passwordInput = screen.getByLabelText(/senha/i);
+    const emailInput = screen.getByLabelText(/email@example.com/i);
+    const passwordInput = screen.getByLabelText("*********");
 
     fireEvent.change(emailInput, { target: { value: "email@example.com" } });
     fireEvent.change(passwordInput, { target: { value: "password" } });
@@ -59,8 +59,8 @@ describe("Login page", () => {
     };
     setItemToLocalStorage("userData", [user]);
 
-    const emailInput = screen.getByLabelText(/email/i);
-    const passwordInput = screen.getByLabelText(/senha/i);
+    const emailInput = screen.getByLabelText(/email@example.com/i);
+    const passwordInput = screen.getByLabelText("*********");
     const loginButton = screen.getByRole("button", { name: /entrar/i });
 
     fireEvent.change(emailInput, {
@@ -84,8 +84,8 @@ describe("Login page", () => {
     };
     setItemToLocalStorage("userData", [user]);
 
-    const emailInput = screen.getByLabelText(/email/i);
-    const passwordInput = screen.getByLabelText(/senha/i);
+    const emailInput = screen.getByLabelText(/email@example.com/i);
+    const passwordInput = screen.getByLabelText("*********");
     const loginButton = screen.getByRole("button", { name: /entrar/i });
 
     fireEvent.change(emailInput, {
@@ -94,7 +94,7 @@ describe("Login page", () => {
     fireEvent.change(passwordInput, { target: { value: user.password } });
     fireEvent.click(loginButton);
 
-    expect(screen.getByText("Invalid email or password")).toBeInTheDocument();
+    expect(screen.getByText("Email ou senha inválida")).toBeInTheDocument();
     expect(getItemFromLocalStorage("isLoggedIn")).not.toBe(true);
     expect(getItemFromLocalStorage("user")).not.toBe(user.name);
   });
@@ -108,7 +108,7 @@ describe("Login page", () => {
 
   it("should redirect to register page when register button is clicked", async () => {
     const registerButton = screen.getByRole("button", {
-      name: /registrar-se/i,
+      name: /cadastre-se/i,
     });
     fireEvent.click(registerButton);
 
