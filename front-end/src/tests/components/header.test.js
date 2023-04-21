@@ -3,93 +3,153 @@ import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { render, fireEvent } from "@testing-library/react";
 import Header from "../../components/Header";
-import {
-  setItemToLocalStorage,
-  getItemFromLocalStorage,
-} from "../../services/localStorage";
 
 describe("Header component", () => {
-  it("should renders correctly", () => {
-    const { getByText } = render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
-
-    expect(getByText(/início/i)).toBeInTheDocument();
-    expect(getByText(/personagens/i)).toBeInTheDocument();
-    expect(getByText(/regiões/i)).toBeInTheDocument();
-    expect(getByText(/perfil/i)).toBeInTheDocument();
-    expect(getByText(/sair/i)).toBeInTheDocument();
+  beforeEach(() => {
+    localStorage.clear();
   });
 
-  it("should redirect to home page when the text 'home' is clicked", () => {
-    const { getByText } = render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+  describe("when user is not logged in", () => {
+    it("should render login and register buttons", () => {
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
 
-    const homeButton = getByText(/início/i);
-    fireEvent.click(homeButton);
+      const loginButton = getByText(/login/i);
+      const registerButton = getByText(/cadastro/i);
 
-    expect(window.location.pathname).toBe("/");
+      expect(loginButton).toBeInTheDocument();
+      expect(registerButton).toBeInTheDocument();
+    });
+
+    it("should redirect to login page when login button is clicked", () => {
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
+
+      const loginButton = getByText(/login/i);
+      fireEvent.click(loginButton);
+
+      expect(window.location.pathname).toBe("/login");
+    });
+
+    it("should redirect to register page when register button is clicked", () => {
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
+
+      const registerButton = getByText(/cadastro/i);
+      fireEvent.click(registerButton);
+
+      expect(window.location.pathname).toBe("/register");
+    });
   });
 
-  it("should redirect to character page when the text 'character' is clicked", () => {
-    const { getByText } = render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+  describe("when user is logged in", () => {
+    beforeEach(() => {
+      localStorage.setItem("user", JSON.stringify("name"));
+    });
+    it("should render profile and exit buttons", () => {
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
 
-    const characterButton = getByText(/personagens/i);
-    fireEvent.click(characterButton);
+      const profileButton = getByText(/perfil/i);
+      const exitButton = getByText(/sair/i);
 
-    expect(window.location.pathname).toBe("/character");
+      expect(profileButton).toBeInTheDocument();
+      expect(exitButton).toBeInTheDocument();
+    });
+
+    it("should redirect to profile page when profile button is clicked", () => {
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
+
+      const profileButton = getByText(/perfil/i);
+      fireEvent.click(profileButton);
+
+      expect(window.location.pathname).toBe("/profile");
+    });
+
+    it("should clear user and isLoggedIn in localStorage and redirect to login page when exit button is clicked", () => {
+      localStorage.setItem("isLoggedIn", true);
+
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
+
+      const exitButton = getByText(/sair/i);
+      fireEvent.click(exitButton);
+
+      expect(localStorage.getItem("user")).toBeNull();
+      expect(localStorage.getItem("isLoggedIn")).toBeNull();
+      expect(window.location.pathname).toBe("/login");
+    });
   });
 
-  it("should redirect to region page when the text 'region' is clicked", () => {
-    const { getByText } = render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+  describe("navigation", () => {
+    it("should renders correctly", () => {
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
 
-    const regionButton = getByText(/regiões/i);
-    fireEvent.click(regionButton);
+      expect(getByText(/início/i)).toBeInTheDocument();
+      expect(getByText(/personagens/i)).toBeInTheDocument();
+      expect(getByText(/regiões/i)).toBeInTheDocument();
+    });
 
-    expect(window.location.pathname).toBe("/region");
-  });
+    it("should redirect to home page when home button is clicked", () => {
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
 
-  it("should redirect to profile page when the text 'profile' is clicked", () => {
-    const { getByText } = render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+      const homeButton = getByText(/início/i);
+      fireEvent.click(homeButton);
 
-    const profileButton = getByText(/perfil/i);
-    fireEvent.click(profileButton);
+      expect(window.location.pathname).toBe("/");
+    });
 
-    expect(window.location.pathname).toBe("/profile");
-  });
+    it("should redirect to character page when character button is clicked", () => {
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
 
-  it("should redirect to login page when the text 'exit' is clicked and clear user/isLoggedIn in localStorage", () => {
-    const { getByText } = render(
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    );
+      const characterButton = getByText(/personagens/i);
+      fireEvent.click(characterButton);
 
-    setItemToLocalStorage("user", "name");
-    setItemToLocalStorage("isLoggedIn", true);
+      expect(window.location.pathname).toBe("/character");
+    });
 
-    const exitButton = getByText(/sair/i);
-    fireEvent.click(exitButton);
+    it("should redirect to region page when region button is clicked", () => {
+      const { getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
 
-    expect(getItemFromLocalStorage("user")).toBeNull();
-    expect(getItemFromLocalStorage("isLoggedIn")).toBeNull();
-    expect(window.location.pathname).toBe("/login");
+      const regionButton = getByText(/regiões/i);
+      fireEvent.click(regionButton);
+
+      expect(window.location.pathname).toBe("/region");
+    });
   });
 });
