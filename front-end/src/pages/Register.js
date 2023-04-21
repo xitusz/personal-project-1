@@ -66,7 +66,7 @@ const Register = () => {
     <div>
       <Header />
       <form className="container mt-4">
-        <h1 className="mb-3 text-center">Registre-se</h1>
+        <h1 className="mb-3 text-center">Cadastre-se</h1>
         <div className="row align-items-center text-center">
           <div className="col-md-10 mx-auto col-lg-5">
             <div className="p-4 p-md-5 border rounded-3 bg-light mb-1">
@@ -132,7 +132,7 @@ const Register = () => {
               className="btn btn-primary w-100 mb-2"
               onClick={handleRegister}
             >
-              Registrar
+              Cadastrar
             </Button>
             <Link to="/login">
               <Button className="btn btn-secondary w-100">Entrar</Button>
