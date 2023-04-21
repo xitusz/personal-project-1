@@ -2,6 +2,7 @@
 import {
   getItemFromLocalStorage,
   setItemToLocalStorage,
+  removeItemFromLocalStorage,
 } from "../../services/localStorage";
 
 describe("localStorage service", () => {
@@ -79,6 +80,29 @@ describe("localStorage service", () => {
       const retrieved = getItemFromLocalStorage(key);
 
       expect(retrieved).toBeNull();
+    });
+  });
+  describe("removeItemFromLocalStorage", () => {
+    beforeEach(() => {
+      setItemToLocalStorage("user", "name");
+    });
+
+    it("should remove item correctly", () => {
+      removeItemFromLocalStorage("user");
+
+      expect(localStorage.getItem("user")).toBeNull();
+    });
+
+    it("should throw an error if key is not provided", () => {
+      expect(() => removeItemFromLocalStorage(undefined)).toThrowError(
+        "key must be provided"
+      );
+    });
+
+    it("should throw an error if key is not a string", () => {
+      expect(() => removeItemFromLocalStorage(1)).toThrowError(
+        "key must be a string"
+      );
     });
   });
 });
