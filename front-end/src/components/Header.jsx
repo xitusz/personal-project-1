@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
+import {
+  getItemFromLocalStorage,
+  removeItemFromLocalStorage,
+} from "../services/localStorage";
 
 const Header = () => {
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(true);
 
   const handleExiting = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("isLoggedIn");
+    removeItemFromLocalStorage("user");
+    removeItemFromLocalStorage("isLoggedIn");
     navigate("/login");
   };
 
@@ -49,22 +53,45 @@ const Header = () => {
               </NavLink>
             </li>
           </ul>
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <NavLink
-                className="nav-link"
-                activeclassname="active"
-                to="/profile"
-              >
-                Perfil
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <Link to="/login" onClick={handleExiting} className="nav-link">
-                Sair
-              </Link>
-            </li>
-          </ul>
+          {getItemFromLocalStorage("user") ? (
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  activeclassname="active"
+                  to="/profile"
+                >
+                  Perfil
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <Link to="/login" onClick={handleExiting} className="nav-link">
+                  Sair
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  activeclassname="active"
+                  to="/login"
+                >
+                  Login
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  activeclassname="active"
+                  to="/register"
+                >
+                  Cadastro
+                </NavLink>
+              </li>
+            </ul>
+          )}
         </div>
       </div>
     </nav>
