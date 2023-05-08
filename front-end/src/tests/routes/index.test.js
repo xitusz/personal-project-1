@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { MemoryRouter } from "react-router-dom";
 import Routes from "../../routes";
 
@@ -35,14 +35,18 @@ describe("Routes", () => {
     expect(getByRole("heading", { name: /cadastre-se/i })).toBeInTheDocument();
   });
 
-  it("should render character component when route is '/character'", () => {
+  it("should render character component when route is '/character'", async () => {
     const { getByRole } = render(
       <MemoryRouter initialEntries={["/character"]}>
         <Routes />
       </MemoryRouter>
     );
 
-    expect(getByRole("heading", { name: /personagens/i })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(
+        getByRole("heading", { name: /personagens/i })
+      ).toBeInTheDocument();
+    });
   });
 
   it("should render region component when route is '/region'", () => {
