@@ -49,6 +49,18 @@ describe("Routes", () => {
     });
   });
 
+  it("should render characterDetails component when route is '/character/:championName'", async () => {
+    const { getByRole } = render(
+      <MemoryRouter initialEntries={["/character/Aatrox"]}>
+        <Routes />
+      </MemoryRouter>
+    );
+
+    await waitFor(() => {
+      expect(getByRole("heading", { name: /aatrox/i })).toBeInTheDocument();
+    });
+  });
+
   it("should render region component when route is '/region'", () => {
     const { getByRole } = render(
       <MemoryRouter initialEntries={["/region"]}>
