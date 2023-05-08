@@ -25,15 +25,15 @@ const Character = () => {
   return (
     <div>
       <Header />
-      <h1>Personagens</h1>
-      <div>
+      <h1 className="text-center m-4">Personagens</h1>
+      <div className="d-flex justify-content-center row mx-5">
         {Object.values(champions).map((champion) => {
           const { id } = champion;
           const imageURL = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_0.jpg`;
 
           return (
-            <div key={id}>
-              <Link to={`/character/${id}`}>
+            <div key={id} className="mb-4" style={{ width: "max-content" }}>
+              <Link to={`/character/${id}`} className="text-decoration-none">
                 <Card name={id} image={imageURL} />
               </Link>
             </div>
