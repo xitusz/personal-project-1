@@ -29,58 +29,67 @@ const CharacterDetails = () => {
   return (
     <div>
       <Header />
-      <div>
-        <div>
+      <div className="mt-4 mx-5">
+        <div className="text-center">
           <h1>{id}</h1>
           <h2>{title}</h2>
-          <hr />
+          <hr className="w-25 mx-auto my-5" />
           <img
             src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_0.jpg`}
             alt={id}
+            className="img-fluid"
           />
         </div>
-        <hr />
-        <div>
+        <hr className="w-25 mx-auto my-5" />
+        <div className="w-75 mx-auto text-center">
           <h3>Função</h3>
-          <div>
+          <div className="border">
             {tags.map((tag) => (
-              <span key={tag}>{tag}</span>
+              <span key={tag} className="mx-1">
+                {tag}
+              </span>
             ))}
           </div>
         </div>
-        <hr />
-        <div>
+        <hr className="w-25 mx-auto my-5" />
+        <div className="w-75 mx-auto text-center">
           <h3>História</h3>
-          <div>
+          <div className="border p-4">
             <span>{lore}</span>
           </div>
         </div>
-        <hr />
-        <div>
-          <h3>Habilidades</h3>
-          <div>
-            <div>
-              <button onClick={() => setSkillState("passive")}>
+        <hr className="w-25 mx-auto my-5" />
+        <div className="w-75 mx-auto">
+          <h3 className="text-center">Habilidades</h3>
+          <div className="border">
+            <div className="d-flex justify-content-center flex-wrap mt-3">
+              <button
+                className="border-0 bg-white mx-2 p-0"
+                onClick={() => setSkillState("passive")}
+              >
                 <img
                   src={`http://ddragon.leagueoflegends.com/cdn/13.9.1/img/passive/${passive.image.full}`}
                   alt={passive.name}
+                  className="rounded-circle"
                 />
               </button>
               {spells.map((spell) => (
                 <button
+                  className="border-0 bg-white p-0 m-2"
                   key={spell.id}
                   onClick={() => setSkillState(spell.name)}
                 >
                   <img
                     src={`http://ddragon.leagueoflegends.com/cdn/13.9.1/img/spell/${spell.image.full}`}
                     alt={spell.name}
+                    className="rounded-circle"
                   />
                 </button>
               ))}
             </div>
-            <div>
+            <div className="text-center mt-3 border">
               {skillState === "passive" && (
-                <div>
+                <div className="mx-auto p-3">
                   <h6>{passive.name}</h6>
                   <span>{passive.description}</span>
                 </div>
@@ -88,7 +97,7 @@ const CharacterDetails = () => {
               {spells.map(
                 (spell) =>
                   skillState === spell.name && (
-                    <div key={spell.id}>
+                    <div key={spell.id} className="mx-auto p-3">
                       <h6>{spell.name}</h6>
                       <span>{spell.description}</span>
                     </div>
@@ -97,29 +106,40 @@ const CharacterDetails = () => {
             </div>
           </div>
         </div>
-        <hr />
-        <div>
-          <h3>Skins</h3>
-          <div>
-            <div>
+        <hr className="w-25 mx-auto my-5" />
+        <div className="w-75 mx-auto">
+          <h3 className="text-center">Skins</h3>
+          <div className="border">
+            <div className="d-flex justify-content-center flex-wrap mt-3">
               {skins.map((skin) => (
-                <button key={skin.id} onClick={() => setSkinState(skin.name)}>
+                <button
+                  className="border-0 bg-white p-0 m-2"
+                  key={skin.id}
+                  onClick={() => setSkinState(skin.name)}
+                >
                   <img
                     src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_${skin.num}.jpg`}
                     alt={skin.name}
                     width={"64px"}
                     height={"64px"}
+                    className="rounded-circle"
+                    style={{ objectFit: "cover" }}
                   />
                 </button>
               ))}
             </div>
-            <div>
+            <div className="d-flex justify-content-center mt-3 border p-2">
               {skins.map(
                 (skin) =>
                   skinState === skin.name && (
-                    <div key={skin.num}>
+                    <div
+                      key={skin.num}
+                      className="mb-4 text-center"
+                      style={{ width: "max-content" }}
+                    >
                       <h6>{skin.name}</h6>
                       <img
+                        className="img-fluid rounded"
                         src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_${skin.num}.jpg`}
                         alt={skin.name}
                       />
