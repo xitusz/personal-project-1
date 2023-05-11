@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Card from "../components/Card";
+import Footer from "../components/Footer";
 
 const Character = () => {
   const [champions, setChampions] = useState([]);
@@ -40,6 +41,7 @@ const Character = () => {
           );
         })}
       </div>
+      <Footer />
     </div>
   );
 };
