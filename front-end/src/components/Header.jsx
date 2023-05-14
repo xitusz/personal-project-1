@@ -16,9 +16,12 @@ const Header = () => {
   };
 
   return (
-    <div style={{ marginTop: "4rem" }}>
-      <nav className="navbar navbar-expand-md navbar-light bg-light fixed-top">
-        <div className="container">
+    <div>
+      <nav
+        id="navbar"
+        className="navbar navbar-expand-md navbar-dark fixed-top"
+      >
+        <div className="container py-2">
           <div className="m-auto">
             <button
               className="navbar-toggler"
@@ -31,24 +34,28 @@ const Header = () => {
           <div
             className={`collapse navbar-collapse ${collapsed ? "" : "show"}`}
           >
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <NavLink className="nav-link" activeclassname="active" to="/">
+            <ul className="navbar-nav me-auto">
+              <li className="d-flex align-items-center nav-item">
+                <NavLink
+                  className="nav-link p-0 mx-2"
+                  activeclassname="active"
+                  to="/"
+                >
                   Início
                 </NavLink>
               </li>
-              <li className="nav-item">
+              <li className="d-flex align-items-center nav-item">
                 <NavLink
-                  className="nav-link"
+                  className="nav-link p-0 mx-2"
                   activeclassname="active"
                   to="/character"
                 >
                   Personagens
                 </NavLink>
               </li>
-              <li className="nav-item">
+              <li className="d-flex align-items-center nav-item">
                 <NavLink
-                  className="nav-link"
+                  className="nav-link p-0 mx-2"
                   activeclassname="active"
                   to="/region"
                 >
@@ -56,22 +63,23 @@ const Header = () => {
                 </NavLink>
               </li>
             </ul>
+            <hr className="hr-header" />
             {getItemFromLocalStorage("user") ? (
               <ul className="navbar-nav">
-                <li className="nav-item">
+                <li className="d-flex align-items-center nav-item">
                   <NavLink
-                    className="nav-link"
+                    className="nav-link p-0 mx-2"
                     activeclassname="active"
                     to="/profile"
                   >
                     Perfil
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="d-flex align-items-center nav-item">
                   <Link
-                    to="/login"
+                    className="nav-link p-0 mx-2"
                     onClick={handleExiting}
-                    className="nav-link"
+                    to="/login"
                   >
                     Sair
                   </Link>
@@ -79,18 +87,18 @@ const Header = () => {
               </ul>
             ) : (
               <ul className="navbar-nav">
-                <li className="nav-item">
+                <li className="d-flex align-items-center nav-item">
                   <NavLink
-                    className="nav-link"
+                    className="nav-link p-0 mx-2"
                     activeclassname="active"
                     to="/login"
                   >
                     Login
                   </NavLink>
                 </li>
-                <li className="nav-item">
+                <li className="d-flex align-items-center nav-item">
                   <NavLink
-                    className="nav-link"
+                    className="nav-link p-0 mx-2"
                     activeclassname="active"
                     to="/register"
                   >
