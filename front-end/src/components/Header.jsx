@@ -26,6 +26,7 @@ const Header = () => {
             <button
               className="navbar-toggler"
               type="button"
+              data-testid="navlinks-button"
               onClick={() => setCollapsed(!collapsed)}
             >
               <span className="navbar-toggler-icon" />
