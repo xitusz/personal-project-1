@@ -13,29 +13,19 @@ describe("Footer component", () => {
     );
   });
 
-  describe("'Voltar ao topo' button", () => {
-    it("should render the 'Voltar ao topo' image", () => {
-      const image = screen.getByAltText(/voltar ao topo/i);
+  describe("back to the top icon", () => {
+    it("should render the back to the top icon", () => {
+      const icon = screen.getByTestId("arrow-icon");
 
-      expect(image).toBeInTheDocument();
-      expect(image).toHaveAttribute(
-        "src",
-        "https://icons.veryicon.com/png/o/internet--web/truckhome/back-to-the-top-2.png"
-      );
+      expect(icon).toBeInTheDocument();
     });
 
-    it("should render the 'Voltar ao topo' button", () => {
-      const button = screen.getByRole("button", { name: /voltar ao topo/i });
-
-      expect(button).toBeInTheDocument();
-    });
-
-    it("should scroll to the top when the 'Voltar ao topo' button is clicked.", () => {
+    it("should scroll to the top when the arrow icon is clicked.", () => {
       window.scrollTo = jest.fn();
 
-      const button = screen.getByRole("button", { name: /voltar ao topo/i });
+      const icon = screen.getByTestId("arrow-icon");
 
-      fireEvent.click(button);
+      fireEvent.click(icon);
 
       expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
     });
