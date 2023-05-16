@@ -1,0 +1,32 @@
+#footer {
+  background-color: #1A242D;
+}
+
+.text-footer, .a-footer {
+  color: #8A90A2;
+  text-decoration: none;
+}
+
+.a-footer:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.arrow-div {
+  position: fixed;
+  bottom: 3%;
+  right: 2%;
+}
+
+.arrow-icon {
+  cursor: pointer;
+}
+
+.icon:hover, .arrow-icon:hover {
+  scale: 1.20;
+}
+
+.hr-footer {
+  background-color: white;
+  color: white;
+}
