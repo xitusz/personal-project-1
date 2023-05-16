@@ -15,6 +15,12 @@ const Header = () => {
     navigate("/login");
   };
 
+  const navigationLinks = [
+    { to: "/", text: "Início" },
+    { to: "/character", text: "Personagens" },
+    { to: "/region", text: "Regiões" },
+  ];
+
   return (
     <div>
       <nav
@@ -36,33 +42,20 @@ const Header = () => {
             className={`collapse navbar-collapse ${collapsed ? "" : "show"}`}
           >
             <ul className="navbar-nav me-auto">
-              <li className="d-flex align-items-center nav-item">
-                <NavLink
-                  className="nav-link p-0 mx-2"
-                  activeclassname="active"
-                  to="/"
+              {navigationLinks.map((link) => (
+                <li
+                  className="d-flex align-items-center nav-item"
+                  key={link.text}
                 >
-                  Início
-                </NavLink>
-              </li>
-              <li className="d-flex align-items-center nav-item">
-                <NavLink
-                  className="nav-link p-0 mx-2"
-                  activeclassname="active"
-                  to="/character"
-                >
-                  Personagens
-                </NavLink>
-              </li>
-              <li className="d-flex align-items-center nav-item">
-                <NavLink
-                  className="nav-link p-0 mx-2"
-                  activeclassname="active"
-                  to="/region"
-                >
-                  Regiões
-                </NavLink>
-              </li>
+                  <NavLink
+                    className="nav-link p-0 mx-2"
+                    activeclassname="active"
+                    to={link.to}
+                  >
+                    {link.text}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
             <hr className="hr-header" />
             {getItemFromLocalStorage("user") ? (
