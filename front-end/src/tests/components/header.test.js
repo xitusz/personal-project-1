@@ -55,6 +55,7 @@ describe("Header component", () => {
     beforeEach(() => {
       localStorage.setItem("user", JSON.stringify("name"));
     });
+
     it("should render profile and exit buttons", () => {
       const { getByText } = render(
         <BrowserRouter>
@@ -150,6 +151,25 @@ describe("Header component", () => {
       fireEvent.click(regionButton);
 
       expect(window.location.pathname).toBe("/region");
+    });
+
+    it("should render display button on small screens", () => {
+      window.innerWidth = 600;
+
+      const { getByTestId, getByText } = render(
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      );
+
+      const navLinksButton = getByTestId("navlinks-button");
+      expect(navLinksButton).toBeInTheDocument();
+
+      fireEvent.click(navLinksButton);
+
+      expect(getByText(/início/i)).toBeInTheDocument();
+      expect(getByText(/personagens/i)).toBeInTheDocument();
+      expect(getByText(/regiões/i)).toBeInTheDocument();
     });
   });
 });
