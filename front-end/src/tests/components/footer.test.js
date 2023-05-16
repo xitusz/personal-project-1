@@ -13,84 +13,90 @@ describe("Footer component", () => {
     );
   });
 
-  it('should renders the "Voltar ao topo" image', () => {
-    const image = screen.getByAltText(/voltar ao topo/i);
+  describe("'Voltar ao topo' button", () => {
+    it("should render the 'Voltar ao topo' image", () => {
+      const image = screen.getByAltText(/voltar ao topo/i);
 
-    expect(image).toBeInTheDocument();
-    expect(image).toHaveAttribute(
-      "src",
-      "https://icons.veryicon.com/png/o/internet--web/truckhome/back-to-the-top-2.png"
-    );
+      expect(image).toBeInTheDocument();
+      expect(image).toHaveAttribute(
+        "src",
+        "https://icons.veryicon.com/png/o/internet--web/truckhome/back-to-the-top-2.png"
+      );
+    });
+
+    it("should render the 'Voltar ao topo' button", () => {
+      const button = screen.getByRole("button", { name: /voltar ao topo/i });
+
+      expect(button).toBeInTheDocument();
+    });
+
+    it("should scroll to the top when the 'Voltar ao topo' button is clicked.", () => {
+      window.scrollTo = jest.fn();
+
+      const button = screen.getByRole("button", { name: /voltar ao topo/i });
+
+      fireEvent.click(button);
+
+      expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
+    });
   });
 
-  it('should renders the "Voltar ao topo" button', () => {
-    const button = screen.getByRole("button", { name: /voltar ao topo/i });
+  describe("contact icons", () => {
+    it("should render the LinkedIn icon", () => {
+      const icon = screen.getByTestId("linkedin-icon");
 
-    expect(button).toBeInTheDocument();
+      expect(icon).toBeInTheDocument();
+    });
+
+    it("should render the LinkedIn link", () => {
+      const link = screen.getByTestId("linkedin-link");
+
+      expect(link).toBeInTheDocument();
+      expect(link).toHaveAttribute(
+        "href",
+        "https://www.linkedin.com/in/gabrielalves1/"
+      );
+    });
+
+    it("should render the Gmail icon", () => {
+      const icon = screen.getByTestId("gmail-icon");
+
+      expect(icon).toBeInTheDocument();
+    });
+
+    it("should render the Gmail link", () => {
+      const link = screen.getByTestId("gmail-link");
+
+      expect(link).toBeInTheDocument();
+      expect(link).toHaveAttribute("href", "mailto:2kgabrielalves@gmail.com");
+    });
+
+    it("should render the Github icon", () => {
+      const icon = screen.getByTestId("github-icon");
+
+      expect(icon).toBeInTheDocument();
+    });
+
+    it("should render the Github link", () => {
+      const link = screen.getByTestId("github-link");
+
+      expect(link).toBeInTheDocument();
+      expect(link).toHaveAttribute("href", "https://github.com/xitusz");
+    });
   });
 
-  it('should scroll to the top when the "Voltar ao topo" button is clicked.', () => {
-    window.scrollTo = jest.fn();
+  describe("copyright message", () => {
+    it("should render the copyright message", () => {
+      const message = screen.getByText(/All Rights Reserved/);
 
-    const button = screen.getByRole("button", { name: /voltar ao topo/i });
+      expect(message).toBeInTheDocument();
+    });
 
-    fireEvent.click(button);
+    it("should render 'gabriel alves' with a link to the GitHub profile", () => {
+      const link = screen.getByRole("link", { name: /gabriel alves/i });
 
-    expect(window.scrollTo).toHaveBeenCalledWith(0, 0);
-  });
-
-  it("should renders the LinkedIn icon", () => {
-    const icon = screen.getByTestId("linkedin-icon");
-
-    expect(icon).toBeInTheDocument();
-  });
-
-  it("should renders the LinkedIn link", () => {
-    const link = screen.getByTestId("linkedin-link");
-
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute(
-      "href",
-      "https://www.linkedin.com/in/gabrielalves1/"
-    );
-  });
-
-  it("should renders the Gmail icon", () => {
-    const icon = screen.getByTestId("gmail-icon");
-
-    expect(icon).toBeInTheDocument();
-  });
-
-  it("should renders the Gmail link", () => {
-    const link = screen.getByTestId("gmail-link");
-
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute("href", "mailto:2kgabrielalves@gmail.com");
-  });
-
-  it("should renders the Github icon", () => {
-    const icon = screen.getByTestId("github-icon");
-
-    expect(icon).toBeInTheDocument();
-  });
-
-  it("should renders the Github link", () => {
-    const link = screen.getByTestId("github-link");
-
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute("href", "https://github.com/xitusz");
-  });
-
-  it("should renders the copyright message", () => {
-    const message = screen.getByText(/All Rights Reserved/);
-
-    expect(message).toBeInTheDocument();
-  });
-
-  it('should renders "gabriel alves" with a link to the GitHub profile', () => {
-    const link = screen.getByRole("link", { name: /gabriel alves/i });
-
-    expect(link).toBeInTheDocument();
-    expect(link).toHaveAttribute("href", "https://github.com/xitusz");
+      expect(link).toBeInTheDocument();
+      expect(link).toHaveAttribute("href", "https://github.com/xitusz");
+    });
   });
 });
