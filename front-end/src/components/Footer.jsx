@@ -1,4 +1,7 @@
 import React from "react";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { FiMail } from "react-icons/fi";
+import { BsArrowUp } from "react-icons/bs";
 
 const Footer = () => {
   return (
@@ -6,28 +9,12 @@ const Footer = () => {
       <div className="mx-5">
         <div className="w-full mx-auto p-4">
           <div className="d-flex align-items-center justify-content-between">
-            <a
-              href="https://github.com/xitusz"
-              target="_blank"
-              rel="noreferrer"
-              className="d-flex align-items-center text-decoration-none"
-            >
-              <img
-                src="https://user-images.githubusercontent.com/25181517/192108374-8da61ba1-99ec-41d7-80b8-fb2f7c0a4948.png"
-                alt="github"
-                height={"64px"}
-              />
-              <p className="fs-3 fw-semibold text-nowrap">GitHub</p>
-            </a>
             <div className="text-end">
-              <button className="btn p-0" onClick={() => window.scrollTo(0, 0)}>
-                <img
-                  src="https://icons.veryicon.com/png/o/internet--web/truckhome/back-to-the-top-2.png"
-                  alt="voltar ao topo"
-                  height={"40px"}
-                />
-                <div className="text-nowrap">Voltar ao topo</div>
-              </button>
+              <BsArrowUp
+                size={45}
+                data-testid="arrow-icon"
+                onClick={() => window.scrollTo(0, 0)}
+              />
             </div>
           </div>
           <div>
@@ -38,10 +25,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img
-                    src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"
-                    alt="linkedIn"
-                  />
+                  <FaLinkedin size={26} data-testid="linkedin-icon" />
                 </a>
               </li>
               <li className="p-1">
@@ -50,22 +34,16 @@ const Footer = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img
-                    src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"
-                    alt="gmail"
-                  />
+                  <FiMail size={30} data-testid="gmail-icon" />
                 </a>
               </li>
               <li className="p-1">
                 <a
-                  href="https://xitusz.github.io/my-portfolio/"
+                  href="https://github.com/xitusz"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img
-                    src="https://camo.githubusercontent.com/33bc5b729c9fb7f279528ca182bb84d42b9b6fb40233e494afa02fad1599bcb7/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f706f7274666f6c696f2d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d41626f75742e6d65266c6f676f436f6c6f723d7768697465"
-                    alt="portfolio"
-                  />
+                  <FaGithub size={26} data-testid="github-icon" />
                 </a>
               </li>
             </ul>
