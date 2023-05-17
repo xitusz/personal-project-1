@@ -1,0 +1,15 @@
+.card-div {
+  height: 20rem;
+  width: 15rem;
+  background-color: #1A242D;
+  transition: transform 0.3s ease-out, background-color 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.card-div:hover {
+  transform: scale(1.05);
+  background-color: rgb(39 111 141);
+}
+
+.card-image {
+  object-fit: cover;
+}
