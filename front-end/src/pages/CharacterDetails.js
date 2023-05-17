@@ -35,23 +35,17 @@ const CharacterDetails = () => {
             <div className="text-center">
               <h1>{id}</h1>
               <h2>{title}</h2>
+              {tags.map((tag) => (
+                <span key={tag} className="mx-1">
+                  {tag}
+                </span>
+              ))}
               <hr className="w-25 mx-auto my-5" />
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_0.jpg`}
                 alt={id}
                 className="img-fluid"
               />
-            </div>
-            <hr className="w-25 mx-auto my-5" />
-            <div className="w-75 mx-auto text-center">
-              <h3>Função</h3>
-              <div className="border">
-                {tags.map((tag) => (
-                  <span key={tag} className="mx-1">
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </div>
             <hr className="w-25 mx-auto my-5" />
             <div className="w-75 mx-auto text-center">
@@ -92,6 +86,7 @@ const CharacterDetails = () => {
                 <div className="text-center mt-3 border">
                   {skillState === "passive" && (
                     <div className="mx-auto p-3">
+                      <span>Passiva</span>
                       <h6>{passive.name}</h6>
                       <span>{passive.description}</span>
                     </div>
@@ -100,6 +95,7 @@ const CharacterDetails = () => {
                     (spell) =>
                       skillState === spell.name && (
                         <div key={spell.id} className="mx-auto p-3">
+                          <span>{spell.id.charAt(spell.id.length - 1)}</span>
                           <h6>{spell.name}</h6>
                           <span>{spell.description}</span>
                         </div>
