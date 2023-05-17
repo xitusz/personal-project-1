@@ -18,12 +18,13 @@
   right: 2%;
 }
 
-.arrow-icon {
+.arrow-icon, .icon {
   cursor: pointer;
+  transition: transform 0.2s ease-out;
 }
 
 .icon:hover, .arrow-icon:hover {
-  scale: 1.20;
+  transform: scale(1.2);
 }
 
 .hr-footer {
