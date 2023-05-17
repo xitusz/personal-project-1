@@ -11,7 +11,7 @@ const Character = () => {
 
   useEffect(() => {
     fetch(
-      "ahttp://ddragon.leagueoflegends.com/cdn/13.9.1/data/pt_BR/champion.json"
+      "http://ddragon.leagueoflegends.com/cdn/13.9.1/data/pt_BR/champion.json"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -23,24 +23,29 @@ const Character = () => {
   return (
     <div>
       <Header />
-      <h1 className="text-center m-4">Personagens</h1>
-      <div className="d-flex justify-content-center row mx-5">
-        {loading ? (
-          <Loading />
-        ) : (
-          Object.values(champions).map((champion) => {
-            const { id } = champion;
-            const imageURL = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_0.jpg`;
+      <div className="character-page py-5">
+        <h1 className="text-center text-white pt-5 p-4">Personagens</h1>
+        <div className="d-flex justify-content-center row mx-5">
+          {loading ? (
+            <Loading />
+          ) : (
+            Object.values(champions).map((champion) => {
+              const { id } = champion;
+              const imageURL = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_0.jpg`;
 
-            return (
-              <div key={id} className="mb-4" style={{ width: "max-content" }}>
-                <Link to={`/character/${id}`} className="text-decoration-none">
-                  <Card name={id} image={imageURL} />
-                </Link>
-              </div>
-            );
-          })
-        )}
+              return (
+                <div key={id} className="mb-4" style={{ width: "max-content" }}>
+                  <Link
+                    to={`/character/${id}`}
+                    className="text-decoration-none"
+                  >
+                    <Card name={id} image={imageURL} />
+                  </Link>
+                </div>
+              );
+            })
+          )}
+        </div>
       </div>
       <Footer />
     </div>
