@@ -43,7 +43,7 @@ describe("CharacterDetails page", () => {
         screen.getByRole("heading", { name: /a espada darkin/i })
       ).toBeInTheDocument();
       expect(
-        screen.getByRole("heading", { name: /função/i })
+        screen.getByRole("heading", { name: /história/i })
       ).toBeInTheDocument();
       expect(
         screen.getByRole("heading", { name: /habilidades/i })
