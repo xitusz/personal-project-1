@@ -27,28 +27,29 @@ const CharacterDetails = () => {
   return (
     <div>
       <Header />
-      <div className="mt-4 mx-5">
+      <div className="character-details-page py-5">
         {loading ? (
           <Loading />
         ) : (
-          <div>
-            <div className="text-center">
+          <div className="p-5 text-white text-center">
+            <div>
               <h1>{id}</h1>
               <h2>{title}</h2>
-              {tags.map((tag) => (
-                <span key={tag} className="mx-1">
-                  {tag}
-                </span>
-              ))}
-              <hr className="w-25 mx-auto my-5" />
+              <div>
+                {tags.map((tag) => (
+                  <span key={tag} className="mx-1">
+                    {tag}
+                  </span>
+                ))}
+              </div>
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_0.jpg`}
                 alt={id}
-                className="img-fluid"
+                className="img-fluid mt-2"
               />
             </div>
             <hr className="w-25 mx-auto my-5" />
-            <div className="w-75 mx-auto text-center">
+            <div className="w-75 mx-auto">
               <h3>História</h3>
               <div className="border p-4">
                 <span>{lore}</span>
@@ -56,36 +57,37 @@ const CharacterDetails = () => {
             </div>
             <hr className="w-25 mx-auto my-5" />
             <div className="w-75 mx-auto">
-              <h3 className="text-center">Habilidades</h3>
+              <h3>Habilidades</h3>
               <div className="border">
-                <div className="d-flex justify-content-center flex-wrap mt-3">
+                <div className="p-2">
                   <button
-                    className="border-0 bg-white mx-2 p-0"
+                    className="border-0 p-0 mx-2 img-button"
                     onClick={() => setSkillState("passive")}
                   >
                     <img
                       src={`http://ddragon.leagueoflegends.com/cdn/13.9.1/img/passive/${passive.image.full}`}
                       alt={passive.name}
-                      className="rounded-circle"
+                      className="button-img"
                     />
                   </button>
                   {spells.map((spell) => (
                     <button
-                      className="border-0 bg-white p-0 m-2"
+                      className="border-0 p-0 m-2 img-button"
                       key={spell.id}
                       onClick={() => setSkillState(spell.name)}
                     >
                       <img
                         src={`http://ddragon.leagueoflegends.com/cdn/13.9.1/img/spell/${spell.image.full}`}
                         alt={spell.name}
-                        className="rounded-circle"
+                        className="button-img"
                       />
                     </button>
                   ))}
                 </div>
-                <div className="text-center mt-3 border">
+                <hr className="m-0" />
+                <div>
                   {skillState === "passive" && (
-                    <div className="mx-auto p-3">
+                    <div className="p-3">
                       <span>Passiva</span>
                       <h6>{passive.name}</h6>
                       <span>{passive.description}</span>
@@ -94,7 +96,7 @@ const CharacterDetails = () => {
                   {spells.map(
                     (spell) =>
                       skillState === spell.name && (
-                        <div key={spell.id} className="mx-auto p-3">
+                        <div key={spell.id} className="p-3">
                           <span>{spell.id.charAt(spell.id.length - 1)}</span>
                           <h6>{spell.name}</h6>
                           <span>{spell.description}</span>
@@ -106,36 +108,36 @@ const CharacterDetails = () => {
             </div>
             <hr className="w-25 mx-auto my-5" />
             <div className="w-75 mx-auto">
-              <h3 className="text-center">Skins</h3>
+              <h3>Skins</h3>
               <div className="border">
-                <div className="d-flex justify-content-center flex-wrap mt-3">
+                <div className="p-2">
                   {skins.map((skin) => (
                     <button
-                      className="border-0 bg-white p-0 m-2"
+                      className="border-0 p-0 m-2 img-button"
                       key={skin.id}
                       onClick={() => setSkinState(skin.name)}
                     >
                       <img
                         src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_${skin.num}.jpg`}
                         alt={skin.name}
-                        width={"64px"}
-                        height={"64px"}
-                        className="rounded-circle"
-                        style={{ objectFit: "cover" }}
+                        className="button-img"
                       />
                     </button>
                   ))}
                 </div>
-                <div className="d-flex justify-content-center mt-3 border p-2">
+                <hr className="m-0" />
+                <div className="d-flex p-3">
                   {skins.map(
                     (skin) =>
                       skinState === skin.name && (
-                        <div
-                          key={skin.num}
-                          className="mb-4 text-center"
-                          style={{ width: "max-content" }}
-                        >
-                          <h6>{skin.name}</h6>
+                        <div key={skin.num}>
+                          <h6>
+                            {skin.name === "default" ? (
+                              <span>{id}</span>
+                            ) : (
+                              <span>{skin.name}</span>
+                            )}
+                          </h6>
                           <img
                             className="img-fluid rounded"
                             src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_${skin.num}.jpg`}

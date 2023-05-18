@@ -1,0 +1,24 @@
+.character-details-page {
+  background-color: #0F1923;
+}
+
+.img-button {
+  background-color: #0F1923;
+  transition: transform 0.2s ease-out;
+}
+
+.img-button:hover {
+  transform: scale(1.1);
+}
+
+.button-img {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: border-radius 0.3s ease-out;
+}
+
+.button-img:hover {
+  border-radius: 25%;
+}

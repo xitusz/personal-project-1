@@ -4,6 +4,7 @@ import "./css/Header.css";
 import "./css/Footer.css";
 import "./css/Character.css";
 import "./css/Card.css";
+import "./css/CharacterDetails.css";
 
 const App = () => {
   return <Routes />;
