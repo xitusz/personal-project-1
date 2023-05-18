@@ -37,7 +37,7 @@ describe("CharacterDetails page", () => {
   it("should renders the champion details correctly", async () => {
     await waitFor(() => {
       expect(
-        screen.getByRole("heading", { name: /aatrox/i })
+        screen.getByRole("heading", { name: /aatrox/i, level: 1 })
       ).toBeInTheDocument();
       expect(
         screen.getByRole("heading", { name: /a espada darkin/i })
