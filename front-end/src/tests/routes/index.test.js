@@ -57,7 +57,9 @@ describe("Routes", () => {
     );
 
     await waitFor(() => {
-      expect(getByRole("heading", { name: /aatrox/i })).toBeInTheDocument();
+      expect(
+        getByRole("heading", { name: /aatrox/i, level: 1 })
+      ).toBeInTheDocument();
     });
   });
 
