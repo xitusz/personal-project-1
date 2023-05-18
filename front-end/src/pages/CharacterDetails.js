@@ -130,7 +130,7 @@ const CharacterDetails = () => {
                   {skins.map(
                     (skin) =>
                       skinState === skin.name && (
-                        <div key={skin.num}>
+                        <div key={skin.num} className="mx-auto">
                           <h6>
                             {skin.name === "default" ? (
                               <span>{id}</span>
