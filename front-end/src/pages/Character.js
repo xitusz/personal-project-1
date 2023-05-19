@@ -34,7 +34,7 @@ const Character = () => {
               const imageURL = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_0.jpg`;
 
               return (
-                <div key={id} className="mb-4" style={{ width: "max-content" }}>
+                <div key={id} className="mb-4 character-card">
                   <Link
                     to={`/character/${id}`}
                     className="text-decoration-none"
