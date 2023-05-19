@@ -4,7 +4,7 @@ import { render } from "@testing-library/react";
 import Card from "../../components/Card";
 
 describe("Card component", () => {
-  it("should renders component with name and image", () => {
+  it("should render component with name and image", () => {
     const { getByText, getByAltText } = render(
       <Card name="example" image="image.jpg" />
     );
@@ -17,7 +17,7 @@ describe("Card component", () => {
     expect(cardImage).toHaveAttribute("src", "image.jpg");
   });
 
-  it("should renders component when image not provided", () => {
+  it("should render component when image not provided", () => {
     const { getByText, getByAltText } = render(<Card name="example" />);
 
     const cardName = getByText(/example/i);
