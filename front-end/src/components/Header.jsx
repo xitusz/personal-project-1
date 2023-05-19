@@ -4,6 +4,7 @@ import {
   getItemFromLocalStorage,
   removeItemFromLocalStorage,
 } from "../services/localStorage";
+import Button from "./Button";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -21,6 +22,56 @@ const Header = () => {
     { to: "/region", text: "Regiões" },
   ];
 
+  const renderAuthenticatedLinks = () => {
+    return (
+      <ul className="navbar-nav">
+        <li className="d-flex align-items-center nav-item">
+          <NavLink
+            className="nav-link p-0 mx-2"
+            activeClassName="active"
+            to="/profile"
+          >
+            Perfil
+          </NavLink>
+        </li>
+        <li className="d-flex align-items-center nav-item">
+          <Link
+            className="nav-link p-0 mx-2"
+            onClick={handleExiting}
+            to="/login"
+          >
+            Sair
+          </Link>
+        </li>
+      </ul>
+    );
+  };
+
+  const renderGuestLinks = () => {
+    return (
+      <ul className="navbar-nav">
+        <li className="d-flex align-items-center nav-item">
+          <NavLink
+            className="nav-link p-0 mx-2"
+            activeClassName="active"
+            to="/login"
+          >
+            Login
+          </NavLink>
+        </li>
+        <li className="d-flex align-items-center nav-item">
+          <NavLink
+            className="nav-link p-0 mx-2"
+            activeClassName="active"
+            to="/register"
+          >
+            Cadastro
+          </NavLink>
+        </li>
+      </ul>
+    );
+  };
+
   return (
     <div>
       <nav
@@ -29,14 +80,14 @@ const Header = () => {
       >
         <div className="container py-2">
           <div className="m-auto">
-            <button
+            <Button
               className="navbar-toggler"
               type="button"
-              data-testid="navlinks-button"
+              dataTestId="navlinks-button"
               onClick={() => setCollapsed(!collapsed)}
             >
               <span className="navbar-toggler-icon" />
-            </button>
+            </Button>
           </div>
           <div
             className={`collapse navbar-collapse ${collapsed ? "" : "show"}`}
@@ -58,49 +109,9 @@ const Header = () => {
               ))}
             </ul>
             <hr className="hr-header" />
-            {getItemFromLocalStorage("user") ? (
-              <ul className="navbar-nav">
-                <li className="d-flex align-items-center nav-item">
-                  <NavLink
-                    className="nav-link p-0 mx-2"
-                    activeclassname="active"
-                    to="/profile"
-                  >
-                    Perfil
-                  </NavLink>
-                </li>
-                <li className="d-flex align-items-center nav-item">
-                  <Link
-                    className="nav-link p-0 mx-2"
-                    onClick={handleExiting}
-                    to="/login"
-                  >
-                    Sair
-                  </Link>
-                </li>
-              </ul>
-            ) : (
-              <ul className="navbar-nav">
-                <li className="d-flex align-items-center nav-item">
-                  <NavLink
-                    className="nav-link p-0 mx-2"
-                    activeclassname="active"
-                    to="/login"
-                  >
-                    Login
-                  </NavLink>
-                </li>
-                <li className="d-flex align-items-center nav-item">
-                  <NavLink
-                    className="nav-link p-0 mx-2"
-                    activeclassname="active"
-                    to="/register"
-                  >
-                    Cadastro
-                  </NavLink>
-                </li>
-              </ul>
-            )}
+            {getItemFromLocalStorage("user")
+              ? renderAuthenticatedLinks()
+              : renderGuestLinks()}
           </div>
         </div>
       </nav>
