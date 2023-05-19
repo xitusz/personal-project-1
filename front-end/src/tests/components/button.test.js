@@ -55,4 +55,10 @@ describe("Button component", () => {
 
     expect(handleClick).not.toHaveBeenCalled();
   });
+
+  it("should renders a button with data-testid attribute", () => {
+    const { getByTestId } = render(<Button dataTestId="test">Click</Button>);
+
+    expect(getByTestId("test")).toBeInTheDocument();
+  });
 });
