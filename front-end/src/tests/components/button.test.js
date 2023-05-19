@@ -4,7 +4,7 @@ import { render, fireEvent } from "@testing-library/react";
 import Button from "../../components/Button";
 
 describe("Button component", () => {
-  it("should renders the children correctly", () => {
+  it("should render the children correctly", () => {
     const { getByRole } = render(<Button>Click</Button>);
 
     expect(getByRole("button", { name: /click/i })).toBeInTheDocument();
@@ -26,7 +26,7 @@ describe("Button component", () => {
     expect(button.type).toBe("submit");
   });
 
-  it("should calls onClick function when clicked", () => {
+  it("should call onClick function when clicked", () => {
     const handleClick = jest.fn();
 
     const { getByRole } = render(<Button onClick={handleClick}>Click</Button>);
@@ -36,7 +36,7 @@ describe("Button component", () => {
     expect(handleClick).toHaveBeenCalled();
   });
 
-  it("should calls default onClick function when not provided", () => {
+  it("should call default onClick function when not provided", () => {
     const { getByRole } = render(<Button>Click</Button>);
 
     fireEvent.click(getByRole("button", { name: /click/i }));
@@ -56,7 +56,7 @@ describe("Button component", () => {
     expect(handleClick).not.toHaveBeenCalled();
   });
 
-  it("should renders a button with data-testid attribute", () => {
+  it("should render a button with data-testid attribute", () => {
     const { getByTestId } = render(<Button dataTestId="test">Click</Button>);
 
     expect(getByTestId("test")).toBeInTheDocument();
