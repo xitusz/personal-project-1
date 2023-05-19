@@ -28,7 +28,7 @@ const Header = () => {
         <li className="d-flex align-items-center nav-item">
           <NavLink
             className="nav-link p-0 mx-2"
-            activeClassName="active"
+            activeclassname="active"
             to="/profile"
           >
             Perfil
@@ -53,7 +53,7 @@ const Header = () => {
         <li className="d-flex align-items-center nav-item">
           <NavLink
             className="nav-link p-0 mx-2"
-            activeClassName="active"
+            activeclassname="active"
             to="/login"
           >
             Login
@@ -62,7 +62,7 @@ const Header = () => {
         <li className="d-flex align-items-center nav-item">
           <NavLink
             className="nav-link p-0 mx-2"
-            activeClassName="active"
+            activeclassname="active"
             to="/register"
           >
             Cadastro
