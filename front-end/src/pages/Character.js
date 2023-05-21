@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 
 const Character = () => {
+  const navigate = useNavigate();
   const [champions, setChampions] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -35,12 +36,12 @@ const Character = () => {
 
               return (
                 <div key={id} className="mb-4 character-card">
-                  <Link
-                    to={`/character/${id}`}
+                  <div
                     className="text-decoration-none"
+                    onClick={() => navigate(`/character/${id}`)}
                   >
                     <Card name={id} image={imageURL} />
-                  </Link>
+                  </div>
                 </div>
               );
             })
