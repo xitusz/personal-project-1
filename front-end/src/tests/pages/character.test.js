@@ -13,7 +13,7 @@ describe("Character page", () => {
     );
   });
 
-  it("should renders the title correctly", async () => {
+  it("should render the title correctly", async () => {
     await waitFor(() => {
       const title = screen.getByRole("heading", { name: /personagens/i });
 
@@ -21,7 +21,7 @@ describe("Character page", () => {
     });
   });
 
-  it("should renders the champions correctly", async () => {
+  it("should render the champions correctly", async () => {
     await waitFor(() => {
       const mock = {
         Aatrox: { id: "Aatrox" },
@@ -41,7 +41,7 @@ describe("Character page", () => {
     });
   });
 
-  it("should renders the loading message correctly", () => {
+  it("should render the loading message correctly", () => {
     const mock = {};
 
     jest.spyOn(global, "fetch").mockImplementation(() =>
