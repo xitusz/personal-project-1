@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import Character from "../../pages/Character";
 
 describe("Character page", () => {
@@ -53,5 +53,27 @@ describe("Character page", () => {
     expect(screen.getByText(/carregando/i)).toBeInTheDocument();
 
     global.fetch.mockRestore();
+  });
+
+  it("should redirect to card details when card is clicked", async () => {
+    await waitFor(() => {
+      const mock = {
+        Aatrox: { id: "Aatrox" },
+      };
+
+      jest.spyOn(global, "fetch").mockImplementation(() =>
+        Promise.resolve({
+          json: () => Promise.resolve({ data: mock }),
+        })
+      );
+
+      const cardAatrox = screen.getByText(/aatrox/i);
+
+      fireEvent.click(cardAatrox);
+
+      expect(window.location.pathname).toBe("/character/Aatrox");
+
+      global.fetch.mockRestore();
+    });
   });
 });
