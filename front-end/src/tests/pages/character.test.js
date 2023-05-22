@@ -127,15 +127,13 @@ describe("Character page", () => {
 
         const input = screen.getByRole("textbox");
 
-        fireEvent.change(input, { target: { value: "" } });
-
-        expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-        expect(screen.getByText(/ahri/i)).toBeInTheDocument();
-
         fireEvent.change(input, { target: { value: "Aaa" } });
 
         expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
         expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+        expect(
+          screen.getByText(/Nenhum campeão encontrado./i)
+        ).toBeInTheDocument();
 
         global.fetch.mockRestore();
       });
