@@ -78,77 +78,10 @@ describe("Character page", () => {
   });
 
   describe("Filter champions", () => {
-    it("should filter according to the text in the input", async () => {
-      await waitFor(() => {
-        const mock = {
-          Aatrox: { id: "Aatrox" },
-          Ahri: { id: "Ahri" },
-        };
-
-        jest.spyOn(global, "fetch").mockImplementation(() =>
-          Promise.resolve({
-            json: () => Promise.resolve({ data: mock }),
-          })
-        );
-
-        const input = screen.getByRole("textbox");
-
-        fireEvent.change(input, { target: { value: "" } });
-
-        expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-        expect(screen.getByText(/ahri/i)).toBeInTheDocument();
-
-        fireEvent.change(input, { target: { value: "Aa" } });
-
-        expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-        expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-
-        fireEvent.change(input, { target: { value: "Ah" } });
-
-        expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-        expect(screen.getByText(/ahri/i)).toBeInTheDocument();
-
-        global.fetch.mockRestore();
-      });
-    });
-
-    it("should render the message 'Nenhum campeão encontrado.' correctly", async () => {
-      await waitFor(() => {
-        const mock = {
-          Aatrox: { id: "Aatrox" },
-          Ahri: { id: "Ahri" },
-        };
-
-        jest.spyOn(global, "fetch").mockImplementation(() =>
-          Promise.resolve({
-            json: () => Promise.resolve({ data: mock }),
-          })
-        );
-
-        const input = screen.getByRole("textbox");
-
-        fireEvent.change(input, { target: { value: "Aaa" } });
-
-        expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-        expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-        expect(
-          screen.getByText(/Nenhum campeão encontrado./i)
-        ).toBeInTheDocument();
-
-        global.fetch.mockRestore();
-      });
-    });
-    describe("should render the correct card based on the selected button.", () => {
-      it("button 'Assassinos'", async () => {
+    describe("Input search", () => {
+      it("should render the input search correctly", async () => {
         await waitFor(() => {
-          const mock = {
-            Aatrox: { id: "Aatrox" },
-            Ahri: { id: "Ahri" },
-            Akali: { id: "Akali" },
-            Akshan: { id: "Akshan" },
-            Alistar: { id: "Alistar" },
-            Amumu: { id: "Amumu" },
-          };
+          const mock = {};
 
           jest.spyOn(global, "fetch").mockImplementation(() =>
             Promise.resolve({
@@ -156,30 +89,19 @@ describe("Character page", () => {
             })
           );
 
-          const buttonAssassin = screen.getByTestId("button-Assassin");
+          const input = screen.getByRole("textbox");
 
-          fireEvent.click(buttonAssassin);
-
-          expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-          expect(screen.getByText(/ahri/i)).toBeInTheDocument();
-          expect(screen.getByText(/akali/i)).toBeInTheDocument();
-          expect(screen.getByText(/akshan/i)).toBeInTheDocument();
-          expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+          expect(input).toBeInTheDocument();
 
           global.fetch.mockRestore();
         });
       });
 
-      it("button 'Magos'", async () => {
+      it("should filter according to the text in the input", async () => {
         await waitFor(() => {
           const mock = {
             Aatrox: { id: "Aatrox" },
             Ahri: { id: "Ahri" },
-            Akali: { id: "Akali" },
-            Akshan: { id: "Akshan" },
-            Alistar: { id: "Alistar" },
-            Amumu: { id: "Amumu" },
           };
 
           jest.spyOn(global, "fetch").mockImplementation(() =>
@@ -187,62 +109,33 @@ describe("Character page", () => {
               json: () => Promise.resolve({ data: mock }),
             })
           );
-          const buttonMage = screen.getByTestId("button-Mage");
 
-          fireEvent.click(buttonMage);
+          const input = screen.getByRole("textbox");
 
-          expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+          fireEvent.change(input, { target: { value: "" } });
+
+          expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
           expect(screen.getByText(/ahri/i)).toBeInTheDocument();
-          expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-          expect(screen.getByText(/amumu/i)).toBeInTheDocument();
 
-          global.fetch.mockRestore();
-        });
-      });
-
-      it("button 'Tanques'", async () => {
-        await waitFor(() => {
-          const mock = {
-            Aatrox: { id: "Aatrox" },
-            Ahri: { id: "Ahri" },
-            Akali: { id: "Akali" },
-            Akshan: { id: "Akshan" },
-            Alistar: { id: "Alistar" },
-            Amumu: { id: "Amumu" },
-          };
-
-          jest.spyOn(global, "fetch").mockImplementation(() =>
-            Promise.resolve({
-              json: () => Promise.resolve({ data: mock }),
-            })
-          );
-
-          const buttonTank = screen.getByTestId("button-Tank");
-
-          fireEvent.click(buttonTank);
+          fireEvent.change(input, { target: { value: "Aa" } });
 
           expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
           expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-          expect(screen.getByText(/alistar/i)).toBeInTheDocument();
-          expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+
+          fireEvent.change(input, { target: { value: "Ah" } });
+
+          expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+          expect(screen.getByText(/ahri/i)).toBeInTheDocument();
 
           global.fetch.mockRestore();
         });
       });
 
-      it("button 'Lutadores'", async () => {
+      it("should render the message 'Nenhum campeão encontrado.' correctly", async () => {
         await waitFor(() => {
           const mock = {
             Aatrox: { id: "Aatrox" },
             Ahri: { id: "Ahri" },
-            Akali: { id: "Akali" },
-            Akshan: { id: "Akshan" },
-            Alistar: { id: "Alistar" },
-            Amumu: { id: "Amumu" },
           };
 
           jest.spyOn(global, "fetch").mockImplementation(() =>
@@ -251,95 +144,24 @@ describe("Character page", () => {
             })
           );
 
-          const buttonFighter = screen.getByTestId("button-Fighter");
+          const input = screen.getByRole("textbox");
 
-          fireEvent.click(buttonFighter);
-
-          expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-          expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
-
-          global.fetch.mockRestore();
-        });
-      });
-
-      it("button 'Atiradores'", async () => {
-        await waitFor(() => {
-          const mock = {
-            Aatrox: { id: "Aatrox" },
-            Ahri: { id: "Ahri" },
-            Akali: { id: "Akali" },
-            Akshan: { id: "Akshan" },
-            Alistar: { id: "Alistar" },
-            Amumu: { id: "Amumu" },
-          };
-
-          jest.spyOn(global, "fetch").mockImplementation(() =>
-            Promise.resolve({
-              json: () => Promise.resolve({ data: mock }),
-            })
-          );
-
-          const buttonMarksman = screen.getByTestId("button-Marksman");
-
-          fireEvent.click(buttonMarksman);
+          fireEvent.change(input, { target: { value: "Aaa" } });
 
           expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
           expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-          expect(screen.getByText(/akshan/i)).toBeInTheDocument();
-          expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+          expect(
+            screen.getByText(/Nenhum campeão encontrado./i)
+          ).toBeInTheDocument();
 
           global.fetch.mockRestore();
         });
       });
-
-      it("button 'Suportes'", async () => {
+    });
+    describe("Filter Button", () => {
+      it("should render the buttons correctly", async () => {
         await waitFor(() => {
-          const mock = {
-            Aatrox: { id: "Aatrox" },
-            Ahri: { id: "Ahri" },
-            Akali: { id: "Akali" },
-            Akshan: { id: "Akshan" },
-            Alistar: { id: "Alistar" },
-            Amumu: { id: "Amumu" },
-          };
-
-          jest.spyOn(global, "fetch").mockImplementation(() =>
-            Promise.resolve({
-              json: () => Promise.resolve({ data: mock }),
-            })
-          );
-
-          const buttonSupport = screen.getByTestId("button-Support");
-
-          fireEvent.click(buttonSupport);
-
-          expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-          expect(screen.getByText(/alistar/i)).toBeInTheDocument();
-          expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
-
-          global.fetch.mockRestore();
-        });
-      });
-
-      it("button 'Todos'", async () => {
-        await waitFor(() => {
-          const mock = {
-            Aatrox: { id: "Aatrox" },
-            Ahri: { id: "Ahri" },
-            Akali: { id: "Akali" },
-            Akshan: { id: "Akshan" },
-            Alistar: { id: "Alistar" },
-            Amumu: { id: "Amumu" },
-          };
+          const mock = {};
 
           jest.spyOn(global, "fetch").mockImplementation(() =>
             Promise.resolve({
@@ -355,108 +177,338 @@ describe("Character page", () => {
           const buttonMarksman = screen.getByTestId("button-Marksman");
           const buttonSupport = screen.getByTestId("button-Support");
 
-          fireEvent.click(buttonAssassin);
-          fireEvent.click(buttonMage);
-          fireEvent.click(buttonTank);
-          fireEvent.click(buttonFighter);
-          fireEvent.click(buttonMarksman);
-          fireEvent.click(buttonSupport);
-
-          expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
-
-          fireEvent.click(buttonAll);
-
-          expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-          expect(screen.getByText(/ahri/i)).toBeInTheDocument();
-          expect(screen.getByText(/akali/i)).toBeInTheDocument();
-          expect(screen.getByText(/akshan/i)).toBeInTheDocument();
-          expect(screen.getByText(/alistar/i)).toBeInTheDocument();
-          expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+          expect(buttonAll).toBeInTheDocument();
+          expect(buttonAssassin).toBeInTheDocument();
+          expect(buttonMage).toBeInTheDocument();
+          expect(buttonTank).toBeInTheDocument();
+          expect(buttonFighter).toBeInTheDocument();
+          expect(buttonMarksman).toBeInTheDocument();
+          expect(buttonSupport).toBeInTheDocument();
 
           global.fetch.mockRestore();
         });
       });
 
-      it("two buttons 'Tanques' and 'Lutadores'", async () => {
-        await waitFor(() => {
-          const mock = {
-            Aatrox: { id: "Aatrox" },
-            Ahri: { id: "Ahri" },
-            Akali: { id: "Akali" },
-            Akshan: { id: "Akshan" },
-            Alistar: { id: "Alistar" },
-            Amumu: { id: "Amumu" },
-          };
+      describe("should render the correct card based on the selected button.", () => {
+        it("button 'Assassinos'", async () => {
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
 
-          jest.spyOn(global, "fetch").mockImplementation(() =>
-            Promise.resolve({
-              json: () => Promise.resolve({ data: mock }),
-            })
-          );
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
 
-          const buttonTank = screen.getByTestId("button-Tank");
-          const buttonFighter = screen.getByTestId("button-Fighter");
+            const buttonAssassin = screen.getByTestId("button-Assassin");
 
-          fireEvent.click(buttonTank);
-          fireEvent.click(buttonFighter);
+            fireEvent.click(buttonAssassin);
 
-          expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-          expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+            expect(screen.getByText(/ahri/i)).toBeInTheDocument();
+            expect(screen.getByText(/akali/i)).toBeInTheDocument();
+            expect(screen.getByText(/akshan/i)).toBeInTheDocument();
+            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
 
-          global.fetch.mockRestore();
+            global.fetch.mockRestore();
+          });
         });
-      });
 
-      it("various buttons 'Assassinos', 'Magos', 'Tanques', 'Lutadores', 'Atiradores', 'Suportes' ", async () => {
-        await waitFor(() => {
-          const mock = {
-            Aatrox: { id: "Aatrox" },
-            Ahri: { id: "Ahri" },
-            Akali: { id: "Akali" },
-            Akshan: { id: "Akshan" },
-            Alistar: { id: "Alistar" },
-            Amumu: { id: "Amumu" },
-          };
+        it("button 'Magos'", async () => {
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
 
-          jest.spyOn(global, "fetch").mockImplementation(() =>
-            Promise.resolve({
-              json: () => Promise.resolve({ data: mock }),
-            })
-          );
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+            const buttonMage = screen.getByTestId("button-Mage");
 
-          const buttonAssassin = screen.getByTestId("button-Assassin");
-          const buttonMage = screen.getByTestId("button-Mage");
-          const buttonTank = screen.getByTestId("button-Tank");
-          const buttonFighter = screen.getByTestId("button-Fighter");
-          const buttonMarksman = screen.getByTestId("button-Marksman");
-          const buttonSupport = screen.getByTestId("button-Support");
+            fireEvent.click(buttonMage);
 
-          fireEvent.click(buttonAssassin);
-          fireEvent.click(buttonMage);
-          fireEvent.click(buttonTank);
-          fireEvent.click(buttonFighter);
-          fireEvent.click(buttonMarksman);
-          fireEvent.click(buttonSupport);
+            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+            expect(screen.getByText(/ahri/i)).toBeInTheDocument();
+            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+            expect(screen.getByText(/amumu/i)).toBeInTheDocument();
 
-          expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-          expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
-          expect(
-            screen.getByText(/Nenhum campeão encontrado./i)
-          ).toBeInTheDocument();
-          global.fetch.mockRestore();
+            global.fetch.mockRestore();
+          });
+        });
+
+        it("button 'Tanques'", async () => {
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
+
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+
+            const buttonTank = screen.getByTestId("button-Tank");
+
+            fireEvent.click(buttonTank);
+
+            expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+            expect(screen.getByText(/alistar/i)).toBeInTheDocument();
+            expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+
+            global.fetch.mockRestore();
+          });
+        });
+
+        it("button 'Lutadores'", async () => {
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
+
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+
+            const buttonFighter = screen.getByTestId("button-Fighter");
+
+            fireEvent.click(buttonFighter);
+
+            expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+
+            global.fetch.mockRestore();
+          });
+        });
+
+        it("button 'Atiradores'", async () => {
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
+
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+
+            const buttonMarksman = screen.getByTestId("button-Marksman");
+
+            fireEvent.click(buttonMarksman);
+
+            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+            expect(screen.getByText(/akshan/i)).toBeInTheDocument();
+            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+
+            global.fetch.mockRestore();
+          });
+        });
+
+        it("button 'Suportes'", async () => {
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
+
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+
+            const buttonSupport = screen.getByTestId("button-Support");
+
+            fireEvent.click(buttonSupport);
+
+            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+            expect(screen.getByText(/alistar/i)).toBeInTheDocument();
+            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+
+            global.fetch.mockRestore();
+          });
+        });
+
+        it("button 'Todos'", async () => {
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
+
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+
+            const buttonAll = screen.getByTestId("button-All");
+            const buttonAssassin = screen.getByTestId("button-Assassin");
+            const buttonMage = screen.getByTestId("button-Mage");
+            const buttonTank = screen.getByTestId("button-Tank");
+            const buttonFighter = screen.getByTestId("button-Fighter");
+            const buttonMarksman = screen.getByTestId("button-Marksman");
+            const buttonSupport = screen.getByTestId("button-Support");
+
+            fireEvent.click(buttonAssassin);
+            fireEvent.click(buttonMage);
+            fireEvent.click(buttonTank);
+            fireEvent.click(buttonFighter);
+            fireEvent.click(buttonMarksman);
+            fireEvent.click(buttonSupport);
+
+            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+
+            fireEvent.click(buttonAll);
+
+            expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+            expect(screen.getByText(/ahri/i)).toBeInTheDocument();
+            expect(screen.getByText(/akali/i)).toBeInTheDocument();
+            expect(screen.getByText(/akshan/i)).toBeInTheDocument();
+            expect(screen.getByText(/alistar/i)).toBeInTheDocument();
+            expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+
+            global.fetch.mockRestore();
+          });
+        });
+
+        it("two buttons 'Tanques' and 'Lutadores'", async () => {
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
+
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+
+            const buttonTank = screen.getByTestId("button-Tank");
+            const buttonFighter = screen.getByTestId("button-Fighter");
+
+            fireEvent.click(buttonTank);
+            fireEvent.click(buttonFighter);
+
+            expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+
+            global.fetch.mockRestore();
+          });
+        });
+
+        it("various buttons 'Assassinos', 'Magos', 'Tanques', 'Lutadores', 'Atiradores', 'Suportes' ", async () => {
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
+
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+
+            const buttonAssassin = screen.getByTestId("button-Assassin");
+            const buttonMage = screen.getByTestId("button-Mage");
+            const buttonTank = screen.getByTestId("button-Tank");
+            const buttonFighter = screen.getByTestId("button-Fighter");
+            const buttonMarksman = screen.getByTestId("button-Marksman");
+            const buttonSupport = screen.getByTestId("button-Support");
+
+            fireEvent.click(buttonAssassin);
+            fireEvent.click(buttonMage);
+            fireEvent.click(buttonTank);
+            fireEvent.click(buttonFighter);
+            fireEvent.click(buttonMarksman);
+            fireEvent.click(buttonSupport);
+
+            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            expect(
+              screen.getByText(/Nenhum campeão encontrado./i)
+            ).toBeInTheDocument();
+            global.fetch.mockRestore();
+          });
         });
       });
     });
