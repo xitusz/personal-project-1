@@ -76,4 +76,67 @@ describe("Character page", () => {
       global.fetch.mockRestore();
     });
   });
+
+  it("should filter according to the text in the input", async () => {
+    await waitFor(() => {
+      const mock = {
+        Aatrox: { id: "Aatrox" },
+        Ahri: { id: "Ahri" },
+      };
+
+      jest.spyOn(global, "fetch").mockImplementation(() =>
+        Promise.resolve({
+          json: () => Promise.resolve({ data: mock }),
+        })
+      );
+
+      const input = screen.getByRole("textbox");
+
+      fireEvent.change(input, { target: { value: "" } });
+
+      expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+      expect(screen.getByText(/ahri/i)).toBeInTheDocument();
+
+      fireEvent.change(input, { target: { value: "Aa" } });
+
+      expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+      expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+
+      fireEvent.change(input, { target: { value: "Ah" } });
+
+      expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+      expect(screen.getByText(/ahri/i)).toBeInTheDocument();
+
+      global.fetch.mockRestore();
+    });
+  });
+
+  it("should render the 'Nenhum campeão encontrado.' message correctly", async () => {
+    await waitFor(() => {
+      const mock = {
+        Aatrox: { id: "Aatrox" },
+        Ahri: { id: "Ahri" },
+      };
+
+      jest.spyOn(global, "fetch").mockImplementation(() =>
+        Promise.resolve({
+          json: () => Promise.resolve({ data: mock }),
+        })
+      );
+
+      const input = screen.getByRole("textbox");
+
+      fireEvent.change(input, { target: { value: "" } });
+
+      expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+      expect(screen.getByText(/ahri/i)).toBeInTheDocument();
+
+      fireEvent.change(input, { target: { value: "Aaa" } });
+
+      expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+      expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+
+      global.fetch.mockRestore();
+    });
+  });
 });
