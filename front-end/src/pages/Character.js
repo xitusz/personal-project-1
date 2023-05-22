@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Character = () => {
   const navigate = useNavigate();
@@ -47,7 +48,11 @@ const Character = () => {
         );
       });
     } else {
-      return <span>Nenhum campeão encontrado.</span>;
+      return (
+        <span className="text-center text-white py-5">
+          Nenhum campeão encontrado.
+        </span>
+      );
     }
   };
 
@@ -56,8 +61,22 @@ const Character = () => {
       <Header />
       <div className="character-page py-5">
         <h1 className="text-center text-white pt-5 p-4">Personagens</h1>
-        <div>
-          <input type="text" value={searchChampion} onChange={handleSearch} />
+        <div className="d-flex justify-content-center w-50 m-auto">
+          <div className="input-group mb-4 searchInput-div">
+            <span className="input-group-text bg-white">
+              <AiOutlineSearch size={23} />
+            </span>
+            <input
+              type="text"
+              className="form-control text-center"
+              placeholder="Buscar campeão"
+              value={searchChampion}
+              onChange={handleSearch}
+            />
+            <span className="input-group-text bg-white">
+              <AiOutlineSearch size={23} />
+            </span>
+          </div>
         </div>
         {loading ? (
           <Loading />
