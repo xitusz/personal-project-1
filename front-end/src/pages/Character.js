@@ -5,12 +5,14 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import { AiOutlineSearch } from "react-icons/ai";
+import Button from "../components/Button";
 
 const Character = () => {
   const navigate = useNavigate();
   const [champions, setChampions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchChampion, setSearchChampion] = useState("");
+  const [filterTypes, setFilterTypes] = useState([]);
 
   useEffect(() => {
     fetch(
@@ -27,9 +29,38 @@ const Character = () => {
     setSearchChampion(event.target.value);
   };
 
-  const filteredChampions = Object.values(champions).filter(({ id }) =>
-    id.toLowerCase().includes(searchChampion.toLowerCase())
-  );
+  const championTypes = [
+    { label: "Todos", value: "All" },
+    { label: "Assassinos", value: "Assassin" },
+    { label: "Magos", value: "Mage" },
+    { label: "Tanques", value: "Tank" },
+    { label: "Lutadores", value: "Fighter" },
+    { label: "Atiradores", value: "Marksman" },
+    { label: "Suportes", value: "Support" },
+  ];
+
+  const handleFilterTypes = (type) => {
+    if (type === "All") {
+      setFilterTypes([]);
+    } else {
+      if (filterTypes.includes(type)) {
+        setFilterTypes(filterTypes.filter((item) => item !== type));
+      } else {
+        setFilterTypes([...filterTypes, type]);
+      }
+    }
+  };
+
+  const filteredChampions = Object.values(champions).filter(({ id, tags }) => {
+    const isMatch = id.toLowerCase().includes(searchChampion.toLowerCase());
+
+    const hasSelectedTypes =
+      filterTypes.length > 0
+        ? filterTypes.every((type) => tags.includes(type))
+        : true;
+
+    return isMatch && hasSelectedTypes;
+  });
 
   const renderChampions = () => {
     if (filteredChampions.length > 0) {
@@ -77,6 +108,17 @@ const Character = () => {
               <AiOutlineSearch size={23} />
             </span>
           </div>
+        </div>
+        <div className="d-flex justify-content-center mb-4">
+          {championTypes.map((type) => (
+            <Button
+              key={type.value}
+              dataTestId={`button-${type.value}`}
+              onClick={() => handleFilterTypes(type.value)}
+            >
+              {type.label}
+            </Button>
+          ))}
         </div>
         {loading ? (
           <Loading />
