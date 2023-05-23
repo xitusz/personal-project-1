@@ -93,22 +93,28 @@ const Character = () => {
       <div className="character-page py-5">
         <h1 className="text-center text-white pt-5 p-4">Personagens</h1>
         <div className="d-flex justify-content-center w-50 m-auto">
-          <div className="input-group mb-4">
+          <div className="input-group mb-4 rounded-1">
             <span className="input-group-text search-input border-0 text-white p-2 px-3">
               <AiOutlineSearch size={23} />
             </span>
             <input
               type="text"
-              className="form-control search-input text-white border-0"
+              className="form-control search-input text-white border-0 p-0"
               placeholder="Buscar campeão"
               value={searchChampion}
               onChange={handleSearch}
             />
           </div>
         </div>
-        <div className="d-flex justify-content-center mb-4">
+        <div className="d-flex justify-content-center flex-wrap mb-4 w-50 m-auto">
           {championTypes.map((type) => (
             <Button
+              className={`border-0 rounded-3 mx-2 mb-2 text-white filter-button py-2 px-3 ${
+                (filterTypes.length === 0 && type.value === "All") ||
+                filterTypes.includes(type.value)
+                  ? "active"
+                  : ""
+              }`}
               key={type.value}
               dataTestId={`button-${type.value}`}
               onClick={() => handleFilterTypes(type.value)}
