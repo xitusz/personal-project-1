@@ -288,12 +288,14 @@ describe("Character page", () => {
 
             fireEvent.click(buttonAssassin);
 
-            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-            expect(screen.getByText(/ahri/i)).toBeInTheDocument();
-            expect(screen.getByText(/akali/i)).toBeInTheDocument();
-            expect(screen.getByText(/akshan/i)).toBeInTheDocument();
-            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+              expect(screen.getByText(/ahri/i)).toBeInTheDocument();
+              expect(screen.getByText(/akali/i)).toBeInTheDocument();
+              expect(screen.getByText(/akshan/i)).toBeInTheDocument();
+              expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            });
 
             global.fetch.mockRestore();
           });
@@ -319,12 +321,14 @@ describe("Character page", () => {
 
             fireEvent.click(buttonMage);
 
-            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-            expect(screen.getByText(/ahri/i)).toBeInTheDocument();
-            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-            expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+              expect(screen.getByText(/ahri/i)).toBeInTheDocument();
+              expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+              expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+            });
 
             global.fetch.mockRestore();
           });
@@ -351,12 +355,14 @@ describe("Character page", () => {
 
             fireEvent.click(buttonTank);
 
-            expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-            expect(screen.getByText(/alistar/i)).toBeInTheDocument();
-            expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+              expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+              expect(screen.getByText(/alistar/i)).toBeInTheDocument();
+              expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+            });
 
             global.fetch.mockRestore();
           });
@@ -383,12 +389,14 @@ describe("Character page", () => {
 
             fireEvent.click(buttonFighter);
 
-            expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+              expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            });
 
             global.fetch.mockRestore();
           });
@@ -415,12 +423,14 @@ describe("Character page", () => {
 
             fireEvent.click(buttonMarksman);
 
-            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-            expect(screen.getByText(/akshan/i)).toBeInTheDocument();
-            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+              expect(screen.getByText(/akshan/i)).toBeInTheDocument();
+              expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            });
 
             global.fetch.mockRestore();
           });
@@ -447,12 +457,14 @@ describe("Character page", () => {
 
             fireEvent.click(buttonSupport);
 
-            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-            expect(screen.getByText(/alistar/i)).toBeInTheDocument();
-            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+              expect(screen.getByText(/alistar/i)).toBeInTheDocument();
+              expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            });
 
             global.fetch.mockRestore();
           });
@@ -490,21 +502,25 @@ describe("Character page", () => {
             fireEvent.click(buttonMarksman);
             fireEvent.click(buttonSupport);
 
-            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            });
 
             fireEvent.click(buttonAll);
 
-            expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-            expect(screen.getByText(/ahri/i)).toBeInTheDocument();
-            expect(screen.getByText(/akali/i)).toBeInTheDocument();
-            expect(screen.getByText(/akshan/i)).toBeInTheDocument();
-            expect(screen.getByText(/alistar/i)).toBeInTheDocument();
-            expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+              expect(screen.getByText(/ahri/i)).toBeInTheDocument();
+              expect(screen.getByText(/akali/i)).toBeInTheDocument();
+              expect(screen.getByText(/akshan/i)).toBeInTheDocument();
+              expect(screen.getByText(/alistar/i)).toBeInTheDocument();
+              expect(screen.getByText(/amumu/i)).toBeInTheDocument();
+            });
 
             global.fetch.mockRestore();
           });
@@ -533,12 +549,14 @@ describe("Character page", () => {
             fireEvent.click(buttonTank);
             fireEvent.click(buttonFighter);
 
-            expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
-            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+              expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            });
 
             global.fetch.mockRestore();
           });
@@ -575,15 +593,18 @@ describe("Character page", () => {
             fireEvent.click(buttonMarksman);
             fireEvent.click(buttonSupport);
 
-            expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
-            expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
-            expect(
-              screen.getByText(/Nenhum campeão encontrado./i)
-            ).toBeInTheDocument();
+            waitFor(() => {
+              expect(screen.queryByText(/aatrox/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akali/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/akshan/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+              expect(
+                screen.getByText(/Nenhum campeão encontrado./i)
+              ).toBeInTheDocument();
+            });
+
             global.fetch.mockRestore();
           });
         });
