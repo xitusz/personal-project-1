@@ -158,6 +158,7 @@ describe("Character page", () => {
         });
       });
     });
+
     describe("Filter Button", () => {
       it("should render the buttons correctly", async () => {
         await waitFor(() => {
@@ -184,6 +185,82 @@ describe("Character page", () => {
           expect(buttonFighter).toBeInTheDocument();
           expect(buttonMarksman).toBeInTheDocument();
           expect(buttonSupport).toBeInTheDocument();
+
+          global.fetch.mockRestore();
+        });
+      });
+
+      it("should correctly activate the 'Todos' button and deactivate the other filter buttons", async () => {
+        await waitFor(() => {
+          const mock = {};
+
+          jest.spyOn(global, "fetch").mockImplementation(() =>
+            Promise.resolve({
+              json: () => Promise.resolve({ data: mock }),
+            })
+          );
+
+          const buttonAll = screen.getByTestId("button-All");
+          const buttonAssassin = screen.getByTestId("button-Assassin");
+          const buttonMage = screen.getByTestId("button-Mage");
+          const buttonTank = screen.getByTestId("button-Tank");
+          const buttonFighter = screen.getByTestId("button-Fighter");
+          const buttonMarksman = screen.getByTestId("button-Marksman");
+          const buttonSupport = screen.getByTestId("button-Support");
+
+          fireEvent.click(buttonAssassin);
+          fireEvent.click(buttonMage);
+          fireEvent.click(buttonTank);
+          fireEvent.click(buttonFighter);
+          fireEvent.click(buttonMarksman);
+          fireEvent.click(buttonSupport);
+
+          fireEvent.click(buttonAll);
+
+          expect(buttonAll).toHaveClass("active");
+          expect(buttonAssassin).not.toHaveClass("active");
+          expect(buttonMage).not.toHaveClass("active");
+          expect(buttonTank).not.toHaveClass("active");
+          expect(buttonFighter).not.toHaveClass("active");
+          expect(buttonMarksman).not.toHaveClass("active");
+          expect(buttonSupport).not.toHaveClass("active");
+
+          global.fetch.mockRestore();
+        });
+      });
+
+      it("should correctly activate all filter buttons except the 'Todos' button", async () => {
+        await waitFor(() => {
+          const mock = {};
+
+          jest.spyOn(global, "fetch").mockImplementation(() =>
+            Promise.resolve({
+              json: () => Promise.resolve({ data: mock }),
+            })
+          );
+
+          const buttonAll = screen.getByTestId("button-All");
+          const buttonAssassin = screen.getByTestId("button-Assassin");
+          const buttonMage = screen.getByTestId("button-Mage");
+          const buttonTank = screen.getByTestId("button-Tank");
+          const buttonFighter = screen.getByTestId("button-Fighter");
+          const buttonMarksman = screen.getByTestId("button-Marksman");
+          const buttonSupport = screen.getByTestId("button-Support");
+
+          fireEvent.click(buttonAssassin);
+          fireEvent.click(buttonMage);
+          fireEvent.click(buttonTank);
+          fireEvent.click(buttonFighter);
+          fireEvent.click(buttonMarksman);
+          fireEvent.click(buttonSupport);
+
+          expect(buttonAll).not.toHaveClass("active");
+          expect(buttonAssassin).toHaveClass("active");
+          expect(buttonMage).toHaveClass("active");
+          expect(buttonTank).toHaveClass("active");
+          expect(buttonFighter).toHaveClass("active");
+          expect(buttonMarksman).toHaveClass("active");
+          expect(buttonSupport).toHaveClass("active");
 
           global.fetch.mockRestore();
         });
