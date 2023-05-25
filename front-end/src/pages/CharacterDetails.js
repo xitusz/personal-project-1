@@ -28,7 +28,7 @@ const CharacterDetails = () => {
   return (
     <div>
       <Header />
-      <div className="character-details-page py-5">
+      <div className="py-5">
         {loading ? (
           <Loading />
         ) : (
