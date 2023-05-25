@@ -9,31 +9,35 @@ describe("Login page", () => {
     localStorage.clear();
   });
 
-  it("should renders the form correctly", () => {
+  it("should render the form correctly", () => {
     render(
       <BrowserRouter>
         <Login />
       </BrowserRouter>
     );
 
-    expect(screen.getByRole("heading", { name: /login/i })).toBeInTheDocument();
-    expect(screen.getByLabelText(/email@example.com/i)).toBeInTheDocument();
-    expect(screen.getByLabelText("*********")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /conectar-se/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText(/email@example.com/i)
+    ).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("*********")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /entrar/i })).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /cadastre-se/i })
     ).toBeInTheDocument();
   });
 
-  it("should updates the email and password fields correctly", () => {
+  it("should update the email and password fields correctly", () => {
     render(
       <BrowserRouter>
         <Login />
       </BrowserRouter>
     );
 
-    const emailInput = screen.getByLabelText(/email@example.com/i);
-    const passwordInput = screen.getByLabelText("*********");
+    const emailInput = screen.getByPlaceholderText(/email@example.com/i);
+    const passwordInput = screen.getByPlaceholderText("*********");
 
     fireEvent.change(emailInput, { target: { value: "email@example.com" } });
     fireEvent.change(passwordInput, { target: { value: "password" } });
@@ -57,8 +61,8 @@ describe("Login page", () => {
       </BrowserRouter>
     );
 
-    const emailInput = screen.getByLabelText(/email@example.com/i);
-    const passwordInput = screen.getByLabelText("*********");
+    const emailInput = screen.getByPlaceholderText(/email@example.com/i);
+    const passwordInput = screen.getByPlaceholderText("*********");
     const loginButton = screen.getByRole("button", { name: /entrar/i });
 
     fireEvent.change(emailInput, { target: { value: user.email } });
@@ -87,8 +91,8 @@ describe("Login page", () => {
       </BrowserRouter>
     );
 
-    const emailInput = screen.getByLabelText(/email@example.com/i);
-    const passwordInput = screen.getByLabelText("*********");
+    const emailInput = screen.getByPlaceholderText(/email@example.com/i);
+    const passwordInput = screen.getByPlaceholderText("*********");
     const loginButton = screen.getByRole("button", { name: /entrar/i });
 
     fireEvent.change(emailInput, {
