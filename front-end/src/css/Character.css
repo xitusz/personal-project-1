@@ -30,7 +30,7 @@
 
 .filter-button {
   background-color: #1A242D;
-  transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out, box-shadow 0,2s ease-out;
 }
 
 .filter-button:hover, .filter-button.active:hover  {
@@ -45,4 +45,5 @@
   background-color: rgb(39 111 141);
   text-decoration: none;
   font-weight: 600;
+  box-shadow: 0 0 5px 1px white;
 }
