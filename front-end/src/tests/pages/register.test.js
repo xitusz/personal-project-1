@@ -9,7 +9,7 @@ describe("Register page", () => {
     localStorage.clear();
   });
 
-  it("should renders the form correctly", () => {
+  it("should render the form correctly", () => {
     render(
       <BrowserRouter>
         <Register />
@@ -19,9 +19,11 @@ describe("Register page", () => {
     expect(
       screen.getByRole("heading", { name: /cadastre-se/i })
     ).toBeInTheDocument();
-    expect(screen.getByLabelText(/nome/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/email@example.com/i)).toBeInTheDocument();
-    expect(screen.getByLabelText("*********")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/nome/i)).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText(/email@example.com/i)
+    ).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("*********")).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /cadastrar/i })
     ).toBeInTheDocument();
@@ -39,9 +41,9 @@ describe("Register page", () => {
       </BrowserRouter>
     );
 
-    const nameInput = screen.getByLabelText(/nome/i);
-    const emailInput = screen.getByLabelText(/email@example.com/i);
-    const passwordInput = screen.getByLabelText("*********");
+    const nameInput = screen.getByPlaceholderText(/nome/i);
+    const emailInput = screen.getByPlaceholderText(/email@example.com/i);
+    const passwordInput = screen.getByPlaceholderText("*********");
 
     fireEvent.change(nameInput, { target: { value: "name" } });
     fireEvent.change(emailInput, { target: { value: "email@example.com" } });
@@ -65,9 +67,9 @@ describe("Register page", () => {
       </BrowserRouter>
     );
 
-    const nameInput = screen.getByLabelText(/nome/i);
-    const emailInput = screen.getByLabelText(/email@example.com/i);
-    const passwordInput = screen.getByLabelText("*********");
+    const nameInput = screen.getByPlaceholderText(/nome/i);
+    const emailInput = screen.getByPlaceholderText(/email@example.com/i);
+    const passwordInput = screen.getByPlaceholderText("*********");
     const registerButton = screen.getByRole("button", { name: /cadastrar/i });
 
     fireEvent.change(nameInput, {
@@ -90,9 +92,9 @@ describe("Register page", () => {
       </BrowserRouter>
     );
 
-    const nameInput = screen.getByLabelText(/nome/i);
-    const emailInput = screen.getByLabelText(/email@example.com/i);
-    const passwordInput = screen.getByLabelText("*********");
+    const nameInput = screen.getByPlaceholderText(/nome/i);
+    const emailInput = screen.getByPlaceholderText(/email@example.com/i);
+    const passwordInput = screen.getByPlaceholderText("*********");
     const registerButton = screen.getByRole("button", { name: /cadastrar/i });
 
     fireEvent.change(nameInput, { target: { value: "a" } });
@@ -112,9 +114,9 @@ describe("Register page", () => {
       </BrowserRouter>
     );
 
-    const nameInput = screen.getByLabelText(/nome/i);
-    const emailInput = screen.getByLabelText(/email@example.com/i);
-    const passwordInput = screen.getByLabelText("*********");
+    const nameInput = screen.getByPlaceholderText(/nome/i);
+    const emailInput = screen.getByPlaceholderText(/email@example.com/i);
+    const passwordInput = screen.getByPlaceholderText("*********");
     const registerButton = screen.getByRole("button", { name: /cadastrar/i });
 
     fireEvent.change(nameInput, { target: { value: "name" } });
@@ -132,9 +134,9 @@ describe("Register page", () => {
       </BrowserRouter>
     );
 
-    const nameInput = screen.getByLabelText(/nome/i);
-    const emailInput = screen.getByLabelText(/email@example.com/i);
-    const passwordInput = screen.getByLabelText("*********");
+    const nameInput = screen.getByPlaceholderText(/nome/i);
+    const emailInput = screen.getByPlaceholderText(/email@example.com/i);
+    const passwordInput = screen.getByPlaceholderText("*********");
     const registerButton = screen.getByRole("button", { name: /cadastrar/i });
 
     fireEvent.change(nameInput, { target: { value: "name" } });
@@ -162,9 +164,9 @@ describe("Register page", () => {
       </BrowserRouter>
     );
 
-    const nameInput = screen.getByLabelText(/nome/i);
-    const emailInput = screen.getByLabelText(/email@example.com/i);
-    const passwordInput = screen.getByLabelText("*********");
+    const nameInput = screen.getByPlaceholderText(/nome/i);
+    const emailInput = screen.getByPlaceholderText(/email@example.com/i);
+    const passwordInput = screen.getByPlaceholderText("*********");
     const registerButton = screen.getByRole("button", { name: /cadastrar/i });
 
     fireEvent.change(nameInput, { target: { value: user.name } });
