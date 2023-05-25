@@ -90,7 +90,7 @@ const Character = () => {
   return (
     <div>
       <Header />
-      <div className="character-page py-5">
+      <div className="py-5">
         <h1 className="text-center text-white pt-5 p-4">Personagens</h1>
         <div className="d-flex justify-content-center w-50 m-auto">
           <div className="input-group mb-4 rounded-1">
