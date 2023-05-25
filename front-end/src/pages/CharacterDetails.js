@@ -61,7 +61,9 @@ const CharacterDetails = () => {
               <div className="border">
                 <div className="p-2">
                   <button
-                    className="border-0 p-0 mx-2 img-button"
+                    className={`border-0 p-0 mx-2 img-button ${
+                      skillState === "passive" ? "active" : ""
+                    }`}
                     onClick={() => setSkillState("passive")}
                   >
                     <img
@@ -72,7 +74,9 @@ const CharacterDetails = () => {
                   </button>
                   {spells.map((spell) => (
                     <button
-                      className="border-0 p-0 m-2 img-button"
+                      className={`border-0 p-0 m-2 img-button ${
+                        skillState === spell.name ? "active" : ""
+                      }`}
                       key={spell.id}
                       onClick={() => setSkillState(spell.name)}
                     >
@@ -113,7 +117,9 @@ const CharacterDetails = () => {
                 <div className="p-2">
                   {skins.map((skin) => (
                     <button
-                      className="border-0 p-0 m-2 img-button"
+                      className={`border-0 p-0 m-2 img-button ${
+                        skinState === skin.name ? "active" : ""
+                      }`}
                       key={skin.id}
                       onClick={() => setSkinState(skin.name)}
                     >
