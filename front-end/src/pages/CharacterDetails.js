@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
+import Button from "../components/Button";
 
 const CharacterDetails = () => {
   const [championDetail, setChampionDetail] = useState({});
@@ -60,10 +61,11 @@ const CharacterDetails = () => {
               <h3>Habilidades</h3>
               <div className="border">
                 <div className="p-2">
-                  <button
+                  <Button
                     className={`border-0 p-0 mx-2 img-button ${
                       skillState === "passive" ? "active" : ""
                     }`}
+                    dataTestId={"passive-skill"}
                     onClick={() => setSkillState("passive")}
                   >
                     <img
@@ -71,13 +73,16 @@ const CharacterDetails = () => {
                       alt={passive.name}
                       className="button-img"
                     />
-                  </button>
+                  </Button>
                   {spells.map((spell) => (
-                    <button
+                    <Button
                       className={`border-0 p-0 m-2 img-button ${
                         skillState === spell.name ? "active" : ""
                       }`}
                       key={spell.id}
+                      dataTestId={`${spell.id.charAt(
+                        spell.id.length - 1
+                      )}-skill`}
                       onClick={() => setSkillState(spell.name)}
                     >
                       <img
@@ -85,7 +90,7 @@ const CharacterDetails = () => {
                         alt={spell.name}
                         className="button-img"
                       />
-                    </button>
+                    </Button>
                   ))}
                 </div>
                 <hr className="m-0" />
@@ -116,11 +121,12 @@ const CharacterDetails = () => {
               <div className="border">
                 <div className="p-2">
                   {skins.map((skin) => (
-                    <button
+                    <Button
                       className={`border-0 p-0 m-2 img-button ${
                         skinState === skin.name ? "active" : ""
                       }`}
                       key={skin.id}
+                      dataTestId={`${skin.name}-button`}
                       onClick={() => setSkinState(skin.name)}
                     >
                       <img
@@ -128,7 +134,7 @@ const CharacterDetails = () => {
                         alt={skin.name}
                         className="button-img"
                       />
-                    </button>
+                    </Button>
                   ))}
                 </div>
                 <hr className="m-0" />
@@ -139,9 +145,11 @@ const CharacterDetails = () => {
                         <div key={skin.num} className="mx-auto">
                           <h6>
                             {skin.name === "default" ? (
-                              <span>{id}</span>
+                              <span data-testid={"default-skin"}>{id}</span>
                             ) : (
-                              <span>{skin.name}</span>
+                              <span data-testid={`${skin.name}-skin`}>
+                                {skin.name}
+                              </span>
                             )}
                           </h6>
                           <img
