@@ -109,7 +109,7 @@ const Character = () => {
         <div className="d-flex justify-content-center flex-wrap mb-4 w-50 m-auto">
           {championTypes.map((type) => (
             <Button
-              className={`border-0 rounded-3 mx-2 mb-2 text-white filter-button py-2 px-3 ${
+              className={`border-0 rounded-3 mx-2 mb-3 text-white filter-button py-2 px-3 ${
                 (filterTypes.length === 0 && type.value === "All") ||
                 filterTypes.includes(type.value)
                   ? "active"
