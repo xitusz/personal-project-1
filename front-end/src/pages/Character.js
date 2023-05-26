@@ -5,7 +5,11 @@ import Card from "../components/Card";
 import Footer from "../components/Footer";
 import Loading from "../components/Loading";
 import Button from "../components/Button";
-import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineStar, AiFillStar } from "react-icons/ai";
+import {
+  setItemToLocalStorage,
+  getItemFromLocalStorage,
+} from "../services/localStorage";
 
 const Character = () => {
   const navigate = useNavigate();
@@ -13,6 +17,10 @@ const Character = () => {
   const [loading, setLoading] = useState(true);
   const [searchChampion, setSearchChampion] = useState("");
   const [filterTypes, setFilterTypes] = useState([]);
+  const [favorites, setFavorites] = useState(() => {
+    const user = getItemFromLocalStorage("user");
+    return user ? user[0].favorites : [];
+  });
 
   useEffect(() => {
     fetch(
@@ -24,6 +32,15 @@ const Character = () => {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    const user = getItemFromLocalStorage("user");
+
+    if (user) {
+      const updatedUser = { ...user[0], favorites: favorites };
+      setItemToLocalStorage("user", [updatedUser]);
+    }
+  }, [favorites]);
 
   const handleSearch = (event) => {
     setSearchChampion(event.target.value);
@@ -51,6 +68,21 @@ const Character = () => {
     }
   };
 
+  const handleFavorite = (championId) => {
+    const isLoggedIn = getItemFromLocalStorage("isLoggedIn");
+
+    if (isLoggedIn) {
+      if (favorites.includes(championId)) {
+        setFavorites(favorites.filter((id) => id !== championId));
+      } else {
+        const sortedFavorites = [...favorites, championId].sort();
+        setFavorites(sortedFavorites);
+      }
+    } else {
+      alert("Você precisa estar conectado para favoritar um campeão.");
+    }
+  };
+
   const filteredChampions = Object.values(champions).filter(({ id, tags }) => {
     const isMatch = id.toLowerCase().includes(searchChampion.toLowerCase());
 
@@ -66,14 +98,24 @@ const Character = () => {
     if (filteredChampions.length > 0) {
       return filteredChampions.map(({ id }) => {
         const imageURL = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_0.jpg`;
+        const isFavorite = favorites.includes(id);
 
         return (
           <div key={id} className="mb-4 character-card">
-            <div
-              className="text-decoration-none"
-              onClick={() => navigate(`/character/${id}`)}
-            >
-              <Card name={id} image={imageURL} />
+            <div>
+              <div onClick={() => handleFavorite(id)}>
+                {isFavorite ? (
+                  <AiFillStar size={20} className="text-white" />
+                ) : (
+                  <AiOutlineStar size={20} className="text-white" />
+                )}
+              </div>
+              <div
+                className="text-decoration-none"
+                onClick={() => navigate(`/character/${id}`)}
+              >
+                <Card name={id} image={imageURL} />
+              </div>
             </div>
           </div>
         );
