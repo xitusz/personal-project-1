@@ -70,7 +70,10 @@ describe("Login page", () => {
     fireEvent.click(loginButton);
 
     expect(localStorage.getItem("isLoggedIn")).toBe("true");
-    expect(JSON.parse(localStorage.getItem("user"))).toBe(user.name);
+    expect(JSON.parse(localStorage.getItem("user"))[0]).toEqual({
+      name: user.name,
+      favorites: [],
+    });
     expect(JSON.parse(localStorage.getItem("user"))).not.toBe(user.email);
     expect(JSON.parse(localStorage.getItem("user"))).not.toBe(user.password);
     expect(window.location.pathname).toBe("/");
