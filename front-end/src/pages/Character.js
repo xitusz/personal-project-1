@@ -102,12 +102,15 @@ const Character = () => {
 
         return (
           <div key={id} className="mb-4 character-card">
-            <div>
-              <div onClick={() => handleFavorite(id)}>
+            <div className="favorite-div rounded">
+              <div
+                className="favorite-icon pb-2 pt-1"
+                onClick={() => handleFavorite(id)}
+              >
                 {isFavorite ? (
-                  <AiFillStar size={20} className="text-white" />
+                  <AiFillStar size={20} className="text-white fav-icon" />
                 ) : (
-                  <AiOutlineStar size={20} className="text-white" />
+                  <AiOutlineStar size={20} className="text-white fav-icon" />
                 )}
               </div>
               <div

@@ -47,3 +47,18 @@
   font-weight: 600;
   box-shadow: 0 0 5px 1px white;
 }
+
+.favorite-icon {
+  margin: auto;
+  width: max-content;
+  transition: transform 0.3s ease-out;
+}
+
+.fav-icon:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.favorite-div {
+  background-color: #1A242D;
+}
