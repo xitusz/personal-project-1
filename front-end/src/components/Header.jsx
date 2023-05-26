@@ -19,7 +19,6 @@ const Header = () => {
   const navigationLinks = [
     { to: "/", text: "Início" },
     { to: "/character", text: "Personagens" },
-    { to: "/region", text: "Regiões" },
   ];
 
   const renderAuthenticatedLinks = () => {

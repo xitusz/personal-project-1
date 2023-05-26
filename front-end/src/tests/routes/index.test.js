@@ -63,16 +63,6 @@ describe("Routes", () => {
     });
   });
 
-  it("should render region component when route is '/region'", () => {
-    const { getByRole } = render(
-      <MemoryRouter initialEntries={["/region"]}>
-        <Routes />
-      </MemoryRouter>
-    );
-
-    expect(getByRole("heading", { name: /regiões/i })).toBeInTheDocument();
-  });
-
   it("should render profile component when route is '/profile'", () => {
     const { getByRole } = render(
       <MemoryRouter initialEntries={["/profile"]}>
