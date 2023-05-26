@@ -22,7 +22,7 @@ describe("Routes", () => {
       </MemoryRouter>
     );
 
-    expect(getByRole("heading", { name: /login/i })).toBeInTheDocument();
+    expect(getByRole("heading", { name: /conectar-se/i })).toBeInTheDocument();
   });
 
   it("should render register component when route is '/register'", () => {
