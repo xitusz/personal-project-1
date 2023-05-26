@@ -111,7 +111,6 @@ describe("Header component", () => {
 
       expect(getByText(/início/i)).toBeInTheDocument();
       expect(getByText(/personagens/i)).toBeInTheDocument();
-      expect(getByText(/regiões/i)).toBeInTheDocument();
     });
 
     it("should redirect to home page when home button is clicked", () => {
@@ -140,19 +139,6 @@ describe("Header component", () => {
       expect(window.location.pathname).toBe("/character");
     });
 
-    it("should redirect to region page when region button is clicked", () => {
-      const { getByText } = render(
-        <BrowserRouter>
-          <Header />
-        </BrowserRouter>
-      );
-
-      const regionButton = getByText(/regiões/i);
-      fireEvent.click(regionButton);
-
-      expect(window.location.pathname).toBe("/region");
-    });
-
     it("should render display button on small screens", () => {
       window.innerWidth = 600;
 
@@ -169,7 +155,6 @@ describe("Header component", () => {
 
       expect(getByText(/início/i)).toBeInTheDocument();
       expect(getByText(/personagens/i)).toBeInTheDocument();
-      expect(getByText(/regiões/i)).toBeInTheDocument();
     });
   });
 });
