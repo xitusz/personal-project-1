@@ -21,6 +21,7 @@ const Character = () => {
     const user = getItemFromLocalStorage("user");
     return user ? user[0].favorites : [];
   });
+  const [showFavorites, setShowFavorites] = useState(false);
 
   useEffect(() => {
     fetch(
@@ -83,6 +84,10 @@ const Character = () => {
     }
   };
 
+  const toggleShowFavorites = () => {
+    setShowFavorites(!showFavorites);
+  };
+
   const filteredChampions = Object.values(champions).filter(({ id, tags }) => {
     const isMatch = id.toLowerCase().includes(searchChampion.toLowerCase());
 
@@ -95,8 +100,15 @@ const Character = () => {
   });
 
   const renderChampions = () => {
-    if (filteredChampions.length > 0) {
-      return filteredChampions.map(({ id }) => {
+    let displayedChampions = filteredChampions;
+
+    if (showFavorites) {
+      displayedChampions = displayedChampions.filter((champion) =>
+        favorites.includes(champion.id)
+      );
+    }
+    if (displayedChampions.length > 0) {
+      return displayedChampions.map(({ id }) => {
         const imageURL = `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${id}_0.jpg`;
         const isFavorite = favorites.includes(id);
 
@@ -151,7 +163,7 @@ const Character = () => {
             />
           </div>
         </div>
-        <div className="d-flex justify-content-center flex-wrap mb-4 w-50 m-auto">
+        <div className="d-flex justify-content-center flex-wrap w-50 m-auto">
           {championTypes.map((type) => (
             <Button
               className={`border-0 rounded-3 mx-2 mb-3 text-white filter-button py-2 px-3 ${
@@ -167,6 +179,16 @@ const Character = () => {
               {type.label}
             </Button>
           ))}
+        </div>
+        <div className="d-flex justify-content-center flex-wrap mb-4 w-50 m-auto">
+          <Button
+            className={`border-0 rounded-3 mx-2 mb-3 text-white filter-button py-2 px-3 ${
+              showFavorites ? "active" : ""
+            }`}
+            onClick={toggleShowFavorites}
+          >
+            Favoritos
+          </Button>
         </div>
         {loading ? (
           <Loading />
