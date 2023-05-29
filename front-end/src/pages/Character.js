@@ -97,6 +97,10 @@ const Character = () => {
     setShowFavorites(!showFavorites);
   };
 
+  const clearFavorites = () => {
+    setFavorites([]);
+  };
+
   const filteredChampions = Object.values(champions).filter(({ id, tags }) => {
     const isMatch = id.toLowerCase().includes(searchChampion.toLowerCase());
 
@@ -197,6 +201,12 @@ const Character = () => {
             onClick={toggleShowFavorites}
           >
             Favoritos
+          </Button>
+          <Button
+            className="border-0 rounded-3 mx-2 mb-3 text-white filter-button py-2 px-3"
+            onClick={clearFavorites}
+          >
+            Limpar Favoritos
           </Button>
         </div>
         {loading ? (
