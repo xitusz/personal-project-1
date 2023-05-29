@@ -51,6 +51,7 @@ describe("Login page", () => {
       name: "name",
       email: "email@example.com",
       password: "password",
+      favorites: [],
     };
 
     localStorage.setItem("userData", JSON.stringify([user]));
@@ -72,9 +73,9 @@ describe("Login page", () => {
     expect(localStorage.getItem("isLoggedIn")).toBe("true");
     expect(JSON.parse(localStorage.getItem("user"))[0]).toEqual({
       name: user.name,
+      email: user.email,
       favorites: [],
     });
-    expect(JSON.parse(localStorage.getItem("user"))).not.toBe(user.email);
     expect(JSON.parse(localStorage.getItem("user"))).not.toBe(user.password);
     expect(window.location.pathname).toBe("/");
   });
