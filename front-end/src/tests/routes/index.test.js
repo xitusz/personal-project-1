@@ -12,7 +12,7 @@ describe("Routes", () => {
       </MemoryRouter>
     );
 
-    expect(getByRole("heading", { name: /home/i })).toBeInTheDocument();
+    expect(getByRole("heading", { name: /início/i })).toBeInTheDocument();
   });
 
   it("should render Login component when route is '/login'", () => {
