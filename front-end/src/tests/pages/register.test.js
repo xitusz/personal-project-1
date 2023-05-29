@@ -59,6 +59,7 @@ describe("Register page", () => {
       name: "name",
       email: "email@example.com",
       password: "password",
+      favorites: [],
     };
 
     render(
