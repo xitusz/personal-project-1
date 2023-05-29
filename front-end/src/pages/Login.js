@@ -30,7 +30,9 @@ const Login = () => {
     );
     if (user) {
       setItemToLocalStorage("isLoggedIn", true);
-      setItemToLocalStorage("user", [{ name: user.name, favorites: [] }]);
+      setItemToLocalStorage("user", [
+        { name: user.name, email: user.email, favorites: user.favorites },
+      ]);
       navigate("/");
     } else {
       setError("Email ou senha inválida");
