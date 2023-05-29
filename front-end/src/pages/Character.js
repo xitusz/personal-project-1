@@ -36,10 +36,19 @@ const Character = () => {
 
   useEffect(() => {
     const user = getItemFromLocalStorage("user");
+    const users = getItemFromLocalStorage("userData");
 
     if (user) {
       const updatedUser = { ...user[0], favorites: favorites };
+      const updatedUsers = users.map((u) => {
+        if (u.email === user[0].email) {
+          return { ...u, favorites: favorites };
+        }
+        return u;
+      });
+
       setItemToLocalStorage("user", [updatedUser]);
+      setItemToLocalStorage("userData", updatedUsers);
     }
   }, [favorites]);
 
