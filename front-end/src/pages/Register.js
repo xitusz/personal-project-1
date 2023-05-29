@@ -44,7 +44,7 @@ const Register = () => {
     } else if (users.find((user) => user.email === email)) {
       setError("Email já registrado");
     } else {
-      const newUser = { name, email, password };
+      const newUser = { name, email, password, favorites: [] };
       users.push(newUser);
       setItemToLocalStorage("userData", users);
       navigate("/login");
