@@ -51,16 +51,8 @@ const Register = () => {
     }
   };
 
-  const handlenameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+  const handleInputChange = (event, setValue) => {
+    setValue(event.target.value);
   };
 
   return (
@@ -83,7 +75,7 @@ const Register = () => {
                     name="name"
                     placeholder="Nome"
                     value={name}
-                    onChange={handlenameChange}
+                    onChange={(event) => handleInputChange(event, setName)}
                     required
                   />
                 </div>
@@ -103,7 +95,7 @@ const Register = () => {
                     name="email"
                     placeholder="email@example.com"
                     value={email}
-                    onChange={handleEmailChange}
+                    onChange={(event) => handleInputChange(event, setEmail)}
                     required
                   />
                 </div>
@@ -123,7 +115,7 @@ const Register = () => {
                     name="password"
                     placeholder="*********"
                     value={password}
-                    onChange={handlePasswordChange}
+                    onChange={(event) => handleInputChange(event, setPassword)}
                     required
                   />
                 </div>
