@@ -133,9 +133,17 @@ const Character = () => {
                 onClick={() => handleFavorite(id)}
               >
                 {isFavorite ? (
-                  <AiFillStar size={20} className="text-white fav-icon" />
+                  <AiFillStar
+                    size={20}
+                    className="text-white fav-icon"
+                    data-testid={`fill-star-icon-${id}`}
+                  />
                 ) : (
-                  <AiOutlineStar size={20} className="text-white fav-icon" />
+                  <AiOutlineStar
+                    size={20}
+                    className="text-white fav-icon"
+                    data-testid={`outline-star-icon-${id}`}
+                  />
                 )}
               </div>
               <div
@@ -198,12 +206,14 @@ const Character = () => {
             className={`border-0 rounded-3 mx-2 mb-3 text-white filter-button py-2 px-3 ${
               showFavorites ? "active" : ""
             }`}
+            dataTestId={`button-Favorite`}
             onClick={toggleShowFavorites}
           >
             Favoritos
           </Button>
           <Button
             className="border-0 rounded-3 mx-2 mb-3 text-white filter-button py-2 px-3"
+            dataTestId={`button-ClearFavorite`}
             onClick={clearFavorites}
           >
             Limpar Favoritos
