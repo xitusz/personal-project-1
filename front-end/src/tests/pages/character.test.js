@@ -77,6 +77,58 @@ describe("Character page", () => {
     });
   });
 
+  it("should favorite when clicking on the star icon if it is unfavorited and unfavorite if it is favorited", async () => {
+    localStorage.setItem("isLoggedIn", true);
+    localStorage.setItem(
+      "user",
+      JSON.stringify([
+        { name: "gabriel", email: "gabriel@email.com", favorites: ["Ahri"] },
+      ])
+    );
+
+    await waitFor(() => {
+      const mock = {
+        Aatrox: { id: "Aatrox" },
+        Ahri: { id: "Ahri" },
+      };
+
+      jest.spyOn(global, "fetch").mockImplementation(() =>
+        Promise.resolve({
+          json: () => Promise.resolve({ data: mock }),
+        })
+      );
+
+      waitFor(() => {
+        const outlineStarIconAatrox = screen.getByTestId(
+          "outline-star-icon-Aatrox"
+        );
+
+        const fillStarIconAatrox = screen.getByTestId("fill-star-icon-Aatrox");
+        const fillStarIconAhri = screen.getByTestId("fill-star-icon-Ahri");
+        const outlineStarIconAhri = screen.getByTestId(
+          "outline-star-icon-Ahri"
+        );
+
+        expect(outlineStarIconAatrox).toBeInTheDocument();
+
+        fireEvent.click(outlineStarIconAatrox);
+
+        expect(fillStarIconAatrox).toBeInTheDocument();
+        expect(fillStarIconAhri).toBeInTheDocument();
+
+        fireEvent.click(fillStarIconAatrox);
+        fireEvent.click(fillStarIconAhri);
+
+        expect(outlineStarIconAatrox).toBeInTheDocument();
+        expect(outlineStarIconAhri).toBeInTheDocument();
+      });
+
+      global.fetch.mockRestore();
+    });
+
+    localStorage.clear();
+  });
+
   describe("Filter champions", () => {
     describe("Input search", () => {
       it("should render the input search correctly", async () => {
@@ -177,6 +229,10 @@ describe("Character page", () => {
           const buttonFighter = screen.getByTestId("button-Fighter");
           const buttonMarksman = screen.getByTestId("button-Marksman");
           const buttonSupport = screen.getByTestId("button-Support");
+          const buttonFavorite = screen.getByTestId("button-Favorite");
+          const buttonClearFavorite = screen.getByTestId(
+            "button-ClearFavorite"
+          );
 
           expect(buttonAll).toBeInTheDocument();
           expect(buttonAssassin).toBeInTheDocument();
@@ -185,6 +241,8 @@ describe("Character page", () => {
           expect(buttonFighter).toBeInTheDocument();
           expect(buttonMarksman).toBeInTheDocument();
           expect(buttonSupport).toBeInTheDocument();
+          expect(buttonFavorite).toBeInTheDocument();
+          expect(buttonClearFavorite).toBeInTheDocument();
 
           global.fetch.mockRestore();
         });
@@ -607,6 +665,145 @@ describe("Character page", () => {
 
             global.fetch.mockRestore();
           });
+        });
+
+        it("button 'Favoritos'", async () => {
+          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem(
+            "user",
+            JSON.stringify([
+              {
+                name: "gabriel",
+                email: "gabriel@email.com",
+                favorites: [],
+              },
+            ])
+          );
+
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
+
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+
+            waitFor(() => {
+              const outlineStarIconAatrox = screen.getByTestId(
+                "outline-star-icon-Aatrox"
+              );
+              const outlineStarIconAkali = screen.getByTestId(
+                "outline-star-icon-Akali"
+              );
+              const outlineStarIconAkshan = screen.getByTestId(
+                "outline-star-icon-Akshan"
+              );
+
+              fireEvent.click(outlineStarIconAatrox);
+              fireEvent.click(outlineStarIconAkali);
+              fireEvent.click(outlineStarIconAkshan);
+            });
+
+            const buttonFavorite = screen.getByTestId("button-Favorite");
+
+            fireEvent.click(buttonFavorite);
+
+            waitFor(() => {
+              expect(screen.getByText(/aatrox/i)).toBeInTheDocument();
+              expect(screen.queryByText(/ahri/i)).not.toBeInTheDocument();
+              expect(screen.getByText(/akali/i)).toBeInTheDocument();
+              expect(screen.getByText(/akshan/i)).toBeInTheDocument();
+              expect(screen.queryByText(/alistar/i)).not.toBeInTheDocument();
+              expect(screen.queryByText(/amumu/i)).not.toBeInTheDocument();
+            });
+
+            global.fetch.mockRestore();
+          });
+
+          localStorage.clear();
+        });
+
+        it("button 'Limpar Favoritos'", async () => {
+          localStorage.setItem("isLoggedIn", true);
+          localStorage.setItem(
+            "user",
+            JSON.stringify([
+              {
+                name: "gabriel",
+                email: "gabriel@email.com",
+                favorites: [],
+              },
+            ])
+          );
+
+          await waitFor(() => {
+            const mock = {
+              Aatrox: { id: "Aatrox" },
+              Ahri: { id: "Ahri" },
+              Akali: { id: "Akali" },
+              Akshan: { id: "Akshan" },
+              Alistar: { id: "Alistar" },
+              Amumu: { id: "Amumu" },
+            };
+
+            jest.spyOn(global, "fetch").mockImplementation(() =>
+              Promise.resolve({
+                json: () => Promise.resolve({ data: mock }),
+              })
+            );
+
+            waitFor(() => {
+              const outlineStarIconAatrox = screen.getByTestId(
+                "outline-star-icon-Aatrox"
+              );
+              const outlineStarIconAkali = screen.getByTestId(
+                "outline-star-icon-Akali"
+              );
+              const outlineStarIconAkshan = screen.getByTestId(
+                "outline-star-icon-Akshan"
+              );
+
+              const fillStarIconAatrox = screen.getByTestId(
+                "fill-star-icon-Aatrox"
+              );
+              const fillStarIconAkali = screen.getByTestId(
+                "fill-star-icon-Akali"
+              );
+              const fillStarIconAkshan = screen.getByTestId(
+                "fill-star-icon-Akshan"
+              );
+
+              const buttonClearFavorite = screen.getByTestId(
+                "button-ClearFavorite"
+              );
+
+              fireEvent.click(outlineStarIconAatrox);
+              fireEvent.click(outlineStarIconAkali);
+              fireEvent.click(outlineStarIconAkshan);
+
+              expect(fillStarIconAatrox).toBeInTheDocument();
+              expect(fillStarIconAkali).toBeInTheDocument();
+              expect(fillStarIconAkshan).toBeInTheDocument();
+
+              fireEvent.click(buttonClearFavorite);
+
+              expect(fillStarIconAatrox).not.toBeInTheDocument();
+              expect(fillStarIconAkali).not.toBeInTheDocument();
+              expect(fillStarIconAkshan).not.toBeInTheDocument();
+            });
+
+            global.fetch.mockRestore();
+          });
+
+          localStorage.clear();
         });
       });
     });
