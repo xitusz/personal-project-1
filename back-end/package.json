@@ -7,7 +7,7 @@
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "start": "node .",
     "dev": "nodemon .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha src/tests/**/*.test.js --exit"
   },
   "keywords": [],
   "author": "",
@@ -23,11 +23,14 @@
     "sequelize": "^6.31.1"
   },
   "devDependencies": {
+    "chai": "^4.3.7",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
-    "sequelize-cli": "^6.6.0"
+    "sequelize-cli": "^6.6.0",
+    "sinon": "^15.1.0"
   }
 }
