@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS favorites (
 );
 
 INSERT INTO users (id, name, email, password) VALUES
-  (1, 'user1', 'user1@email.com', 'a4c86edecc5aee06eff8fdeda69e0d04'); -- senha: md5('--adm2@21!!--')
+  (1, 'user', 'user@email.com', 'e10adc3949ba59abbe56e057f20f883e'); -- senha: md5('123456')
 
 INSERT INTO favorites (userId, favorite) VALUES
 	(1, JSON_ARRAY('Aatrox', 'Ahri', 'Akali'));
